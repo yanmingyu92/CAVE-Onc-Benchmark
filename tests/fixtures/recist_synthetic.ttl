@@ -1,0 +1,241 @@
+@prefix cave: <https://cave-onc.org/shacl/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+cave:RS_SUBJ-A_V1_TARGET_RESPONSE_OVRESP_345 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "NA" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 1 .
+
+cave:RS_SUBJ-A_V1_TARGET_RESPONSE_SUMDIAM_345 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "NA" ;
+    cave:RSSTRESN 50.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 1 .
+
+cave:RS_SUBJ-A_V2_TARGET_RESPONSE_OVRESP_9386 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSDTC "2025-02-01"^^xsd:date ;
+    cave:RSORRES "PR" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 2 .
+
+cave:RS_SUBJ-A_V2_TARGET_RESPONSE_SUMDIAM_9386 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "PR" ;
+    cave:RSSTRESN 25.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 2 .
+
+cave:RS_SUBJ-A_V3_TARGET_RESPONSE_OVRESP_3558 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSDTC "2025-03-15"^^xsd:date ;
+    cave:RSORRES "CR" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 3 .
+
+cave:RS_SUBJ-A_V3_TARGET_RESPONSE_SUMDIAM_3558 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "CR" ;
+    cave:RSSTRESN 0.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 3 .
+
+cave:RS_SUBJ-B_V1_TARGET_RESPONSE_OVRESP_345 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "NA" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 1 .
+
+cave:RS_SUBJ-B_V1_TARGET_RESPONSE_SUMDIAM_345 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "NA" ;
+    cave:RSSTRESN 40.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 1 .
+
+cave:RS_SUBJ-B_V2_TARGET_RESPONSE_OVRESP_124 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "SD" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 2 .
+
+cave:RS_SUBJ-B_V2_TARGET_RESPONSE_SUMDIAM_124 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "SD" ;
+    cave:RSSTRESN 35.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 2 .
+
+cave:RS_SUBJ-B_V3_TARGET_RESPONSE_OVRESP_6590 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "PD" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 3 .
+
+cave:RS_SUBJ-B_V3_TARGET_RESPONSE_SUMDIAM_6590 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "PD" ;
+    cave:RSSTRESN 38.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 3 .
+
+cave:RS_SUBJ-C_V1_TARGET_RESPONSE_OVRESP_345 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "NA" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 1 .
+
+cave:RS_SUBJ-C_V1_TARGET_RESPONSE_SUMDIAM_345 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "NA" ;
+    cave:RSSTRESN 50.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 1 .
+
+cave:RS_SUBJ-C_V2_TARGET_RESPONSE_OVRESP_9386 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSDTC "2025-01-15"^^xsd:date ;
+    cave:RSORRES "PR" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 2 .
+
+cave:RS_SUBJ-C_V2_TARGET_RESPONSE_SUMDIAM_9386 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "PR" ;
+    cave:RSSTRESN 30.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 2 .
+
+cave:RS_SUBJ-C_V3_TARGET_RESPONSE_OVRESP_124 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSDTC "2025-03-01"^^xsd:date ;
+    cave:RSORRES "SD" ;
+    cave:RSTESTCD "OVRESP" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 3 .
+
+cave:RS_SUBJ-C_V3_TARGET_RESPONSE_SUMDIAM_124 a cave:RS ;
+    cave:RSCAT "TARGET RESPONSE" ;
+    cave:RSORRES "SD" ;
+    cave:RSSTRESN 35.0 ;
+    cave:RSTESTCD "SUMDIAM" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 3 .
+
+cave:TR_SUBJ-A_V1_LDIAM_2982 a cave:TR ;
+    cave:EPOCH "SCREENING" ;
+    cave:TRSTRESN 30.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 1 .
+
+cave:TR_SUBJ-A_V1_LDIAM_9002 a cave:TR ;
+    cave:EPOCH "SCREENING" ;
+    cave:TRSTRESN 20.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 1 .
+
+cave:TR_SUBJ-A_V2_LDIAM_1217 a cave:TR ;
+    cave:TRSTRESN 10.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 2 .
+
+cave:TR_SUBJ-A_V2_LDIAM_4926 a cave:TR ;
+    cave:TRSTRESN 15.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 2 .
+
+cave:TR_SUBJ-A_V3_LDIAM_6617 a cave:TR ;
+    cave:TRSTRESN 0.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-A" ;
+    cave:VISITNUM 3 .
+
+cave:TR_SUBJ-B_V1_LDIAM_8871 a cave:TR ;
+    cave:EPOCH "SCREENING" ;
+    cave:TRSTRESN 40.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 1 .
+
+cave:TR_SUBJ-B_V2_LDIAM_1676 a cave:TR ;
+    cave:TRSTRESN 35.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 2 .
+
+cave:TR_SUBJ-B_V3_LDIAM_9154 a cave:TR ;
+    cave:TRSTRESN 38.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 3 .
+
+cave:TR_SUBJ-C_V1_LDIAM_3392 a cave:TR ;
+    cave:EPOCH "SCREENING" ;
+    cave:TRSTRESN 50.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 1 .
+
+cave:TR_SUBJ-C_V2_LDIAM_2982 a cave:TR ;
+    cave:TRSTRESN 30.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 2 .
+
+cave:TR_SUBJ-C_V3_LDIAM_1676 a cave:TR ;
+    cave:TRSTRESN 35.0 ;
+    cave:TRTARGETLN true ;
+    cave:TRTESTCD "LDIAM" ;
+    cave:USUBJID "SUBJ-C" ;
+    cave:VISITNUM 3 .
+
+cave:TU_SUBJ-B_V1_T01 a cave:TU ;
+    cave:TUCAT "TARGET LESION" ;
+    cave:TULNKID "T01" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 1 .
+
+cave:TU_SUBJ-B_V1_T02 a cave:TU ;
+    cave:TUCAT "TARGET LESION" ;
+    cave:TULNKID "T02" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 1 .
+
+cave:TU_SUBJ-B_V3_T03 a cave:TU ;
+    cave:TUCAT "TARGET LESION" ;
+    cave:TULNKID "T03" ;
+    cave:USUBJID "SUBJ-B" ;
+    cave:VISITNUM 3 .
+

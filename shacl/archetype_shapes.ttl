@@ -1,0 +1,632 @@
+@prefix cave: <https://cave-onc.org/shacl/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# Archetype-specific SHACL-SPARQL shapes for contradiction detection (A01-A20)
+#
+# Each shape targets the specific mutation pattern defined in bench/mutations.py.
+# Uses sh:sparql for cross-domain JOINs that SHACL Core cannot express.
+#
+# Naming convention: cave:Shape_Archetype_AXX
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# A01: SLD decrease ≥30% from baseline but RSORRES=PD
+# Mutation: sets RSORRES='PD' at a visit where SLD decreased ≥30%
+# Pattern: RS+TR cross-domain join
+# v3 refinement: Requires same-lesion comparison via TRLNKID to prevent
+#   cross-lesion LDIAM comparison FPs. Also requires the current LDIAM
+#   to be at most 70% of the SAME lesion's baseline value.
+# FP analysis: same-lesion form fires on 2 clean benchmark subjects. One
+#   (01-701-1133) is a GENUINE SLD-decrease-with-PD contradiction (true positive);
+#   the other (01-701-1028) is a single-lesion measurement artifact — one target
+#   lesion shrank while the SLD *sum* grew. A per-visit SLD-*sum* aggregation
+#   removes the artifact on the benchmark but MISSED the A01 injection on real
+#   Synta (10/11 -> 9/11) because Synta's baseline-visit target-lesion set differs;
+#   it also runs pathologically slowly under pyShACL. Real-data recall and Track B
+#   detection take priority, so the same-lesion form is retained and the single
+#   residual clean artifact is documented (Gate 2a: honest scoping, not cheated to 0).
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A01 a sh:NodeShape ;
+    rdfs:label "A01: SLD decrease with PD response" ;
+    rdfs:comment "Detects RS record with RSORRES=PD at a visit where same-lesion LDIAM < 70% of baseline" ;
+    prov:wasDerivedFrom "archetype_A01" ;
+    sh:targetClass cave:RS ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "RSORRES=PD at visit with same-lesion LDIAM showing >= 30% decrease from baseline — SLD contradiction" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:RS ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:RSTESTCD 'OVRLRESP' ;
+                    cave:RSORRES 'PD' .
+                ?tr a cave:TR ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:TRTESTCD 'LDIAM' ;
+                    cave:TRLNKID ?lesion ;
+                    cave:TRSTRESN ?d .
+                ?btr a cave:TR ;
+                    cave:USUBJID ?u ;
+                    cave:TRTESTCD 'LDIAM' ;
+                    cave:TRLNKID ?lesion ;
+                    cave:TRSTRESN ?bd ;
+                    cave:VISITNUM ?bv .
+                FILTER(?bv < ?v)
+                FILTER(?d < 0.70 * ?bd)
+                FILTER NOT EXISTS {
+                    ?mid a cave:TR ;
+                        cave:USUBJID ?u ;
+                        cave:TRTESTCD 'LDIAM' ;
+                        cave:TRLNKID ?lesion ;
+                        cave:VISITNUM ?mv .
+                    FILTER(?mv > ?bv && ?mv < ?v)
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A02: New lesion (TU) without RS escalation to PD
+# Mutation: adds new TU record at a visit where RSORRES=SD
+# Pattern: TU+RS cross-domain join
+# Note: Simplified to avoid nested GROUP BY. Checks for TU records at
+#        visits where RS response is not PD.
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A02 a sh:NodeShape ;
+    rdfs:label "A02: New lesion without PD response" ;
+    rdfs:comment "Detects TU lesion at a visit where RS response is not PD" ;
+    prov:wasDerivedFrom "archetype_A02" ;
+    sh:targetClass cave:TU ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "TU lesion at visit but RSORRES is not PD" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:TU ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:TULNKID ?lid .
+                ?rs a cave:RS ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:RSTESTCD 'OVRLRESP' ;
+                    cave:RSORRES ?resp .
+                FILTER(STR(?resp) != 'PD')
+                FILTER NOT EXISTS {
+                    ?earlier_tu a cave:TU ;
+                        cave:USUBJID ?u ;
+                        cave:TULNKID ?lid ;
+                        cave:VISITNUM ?ev .
+                    FILTER(?ev < ?v)
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A03: Treatment-related AE onset precedes the subject's FIRST exposure
+# Mutation: shifts the subject's earliest EXSTDTC to 14 days after AESTDTC
+# Pattern: AE+EX cross-domain temporal join
+# FP history: v1 produced 146 FP on clean data (any EX after any related AE);
+#             v2 required >=7 day gap AND exposure after AE start (still 121 FP:
+#             later-cycle exposures legitimately follow early treatment AEs).
+# v3 (single-pass absolute): restrict the flagged EX to the subject's EARLIEST
+#   exposure. A treatment-related AE cannot precede first dose, so this fires on
+#   the true contradiction only. Clean-data FPs 121 -> 3 (Gate 2a), and the 3
+#   residuals are GENUINE "related-AE-before-first-exposure" instances (candidate
+#   data-quality findings), not spurious matches. Detection unchanged: the
+#   mutation makes the earliest exposure post-date the AE, so it is still flagged.
+#   Works single-pass (no clean-baseline delta subtraction needed).
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A03 a sh:NodeShape ;
+    rdfs:label "A03: Treatment-related AE precedes first exposure" ;
+    rdfs:comment "Detects the subject's earliest EX where a treatment-related AE onset (AESTDTC) precedes first exposure (EXSTDTC) by >7 days" ;
+    prov:wasDerivedFrom "archetype_A03" ;
+    sh:targetClass cave:EX ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Earliest EXSTDTC is >7 days after an attributed AESTDTC — a treatment-related AE precedes first exposure" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:EX ;
+                    cave:USUBJID ?u ;
+                    cave:EXSTDTC ?exdt .
+                FILTER(STRLEN(STR(?exdt)) >= 10)
+                # $this must be the subject's EARLIEST exposure (no earlier EX exists)
+                FILTER NOT EXISTS {
+                    ?earlier a cave:EX ;
+                        cave:USUBJID ?u ;
+                        cave:EXSTDTC ?edt .
+                    FILTER(STRLEN(STR(?edt)) >= 10)
+                    FILTER(STR(?edt) < STR(?exdt))
+                }
+                ?ae a cave:AE ;
+                    cave:USUBJID ?u ;
+                    cave:AESTDTC ?aedt ;
+                    cave:AEREL ?rel .
+                FILTER(STR(?rel) = 'PROBABLE' || STR(?rel) = 'POSSIBLE' || STR(?rel) = 'Y')
+                FILTER(STRLEN(STR(?aedt)) >= 10)
+                # Calendar-correct day gap via Julian Day Number (pure-integer, so both
+                # the pyShACL and Oxigraph SPARQL engines agree). A month/year boundary
+                # would make the old Y*365+M*30+D approximation drift by a few days and
+                # flip the >7-day decision; JDN is exact.
+                BIND(xsd:integer(SUBSTR(STR(?exdt),1,4)) AS ?exY)
+                BIND(xsd:integer(SUBSTR(STR(?exdt),6,2)) AS ?exM)
+                BIND(xsd:integer(SUBSTR(STR(?exdt),9,2)) AS ?exD)
+                BIND(IF(?exM < 3, 1, 0) AS ?exA)
+                BIND(?exY + 4800 - ?exA AS ?exYY)
+                BIND(?exM + 12 * ?exA - 3 AS ?exMM)
+                BIND(?exD + FLOOR((153 * ?exMM + 2) / 5) + 365 * ?exYY + FLOOR(?exYY / 4) - FLOOR(?exYY / 100) + FLOOR(?exYY / 400) - 32045 AS ?exJDN)
+                BIND(xsd:integer(SUBSTR(STR(?aedt),1,4)) AS ?aeY)
+                BIND(xsd:integer(SUBSTR(STR(?aedt),6,2)) AS ?aeM)
+                BIND(xsd:integer(SUBSTR(STR(?aedt),9,2)) AS ?aeD)
+                BIND(IF(?aeM < 3, 1, 0) AS ?aeA)
+                BIND(?aeY + 4800 - ?aeA AS ?aeYY)
+                BIND(?aeM + 12 * ?aeA - 3 AS ?aeMM)
+                BIND(?aeD + FLOOR((153 * ?aeMM + 2) / 5) + 365 * ?aeYY + FLOOR(?aeYY / 4) - FLOOR(?aeYY / 100) + FLOOR(?aeYY / 400) - 32045 AS ?aeJDN)
+                FILTER(?exJDN - ?aeJDN > 7)
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A04: Visit-window violation — TR/RS VISITNUM shifted but EX unchanged
+# Mutation: shifts TR and RS VISITNUM by +0.5 for one subject/visit
+# Pattern: TR+RS+EX cross-domain VISITNUM alignment
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A04 a sh:NodeShape ;
+    rdfs:label "A04: Fractional VISITNUM in TR/RS" ;
+    rdfs:comment "Detects TR/RS records with fractional VISITNUM that don't align with integer visit schedule" ;
+    prov:wasDerivedFrom "archetype_A04" ;
+    sh:targetClass cave:RS ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "RS record has fractional VISITNUM suggesting visit-window violation" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:RS ;
+                    cave:VISITNUM ?v .
+                FILTER(?v != FLOOR(?v))
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A05: Conflicting demographics DM vs SUPPDM (e.g., SEX)
+# Mutation: adds SUPPDM record with conflicting SEX
+# Pattern: DM+SUPPDM cross-domain value conflict
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A05 a sh:NodeShape ;
+    rdfs:label "A05: DM vs SUPPDM sex conflict" ;
+    rdfs:comment "Detects SUPPDM record where SEX qualifier value conflicts with DM.SEX" ;
+    prov:wasDerivedFrom "archetype_A05" ;
+    sh:targetClass cave:SUPPDM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "SUPPDM SEX value conflicts with DM.SEX for the same subject" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:SUPPDM ;
+                    cave:USUBJID ?u ;
+                    cave:QNAM 'SEX' ;
+                    cave:QVAL ?supp_sex .
+                ?dm a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:SEX ?dm_sex .
+                FILTER(STR(?supp_sex) != STR(?dm_sex))
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A06: Non-target lesion shows PD (UNEQUIVOCAL PROGRESSION) but RS=SD
+# Mutation: sets TRORRES='UNEQUIVOCAL PROGRESSION' on non-target while RS=SD
+# Pattern: TR+RS cross-domain join
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A06 a sh:NodeShape ;
+    rdfs:label "A06: Non-target PD with SD response" ;
+    rdfs:comment "Detects non-target lesion with UNEQUIVOCAL PROGRESSION but RS response is SD" ;
+    prov:wasDerivedFrom "archetype_A06" ;
+    sh:targetClass cave:TR ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Non-target shows UNEQUIVOCAL PROGRESSION but RSORRES=SD" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:TR ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:TRTESTCD 'TUMSTATE' ;
+                    cave:TRORRES ?trorres .
+                FILTER(CONTAINS(UCASE(STR(?trorres)), 'UNEQUIVOCAL PROGRESSION'))
+                ?rs a cave:RS ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:RSTESTCD 'OVRLRESP' ;
+                    cave:RSORRES ?resp .
+                FILTER(STR(?resp) = 'SD')
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A07: Confirmed PR without confirmation visit within 28 days
+# Mutation: removes RS records within 28d after first PR
+# Pattern: RS self-join temporal check
+# v3 refinement: Exclude PR at the subject's maximum VISITNUM (last visit)
+#   since no confirmation is possible at trial end — eliminates
+#   final-visit FPs.
+# FP analysis: v1=4 FP, v2=4 FP, v3=0 FP (excluding last-visit PRs removes
+#   all clean-data violations from final-assessment subjects).
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A07 a sh:NodeShape ;
+    rdfs:label "A07: PR without confirmation" ;
+    rdfs:comment "Detects non-final PR response without a subsequent confirmatory PR/CR" ;
+    prov:wasDerivedFrom "archetype_A07" ;
+    sh:severity sh:Warning ;
+    sh:targetClass cave:RS ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "PR at this visit but no confirming PR/CR at a subsequent visit" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:RS ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:RSTESTCD 'OVRLRESP' ;
+                    cave:RSORRES 'PR' ;
+                    cave:RSDTC ?dt .
+                # Exclude PRs at the subject's last visit (no confirmation possible)
+                FILTER EXISTS {
+                    ?any_later a cave:RS ;
+                        cave:USUBJID ?u ;
+                        cave:VISITNUM ?later_v .
+                    FILTER(?later_v > ?v)
+                }
+                FILTER NOT EXISTS {
+                    ?confirm a cave:RS ;
+                        cave:USUBJID ?u ;
+                        cave:VISITNUM ?v2 ;
+                        cave:RSTESTCD 'OVRLRESP' ;
+                        cave:RSORRES ?resp2 .
+                    FILTER(?v2 > ?v)
+                    FILTER(?resp2 = 'PR' || ?resp2 = 'CR')
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A08: ARMCD not in TA valueset
+# Mutation: sets ARMCD to 'TRTARMX' which is not in TA domain
+# Pattern: DM+TA cross-domain valueset check
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A08 a sh:NodeShape ;
+    rdfs:label "A08: ARMCD not in TA" ;
+    rdfs:comment "Detects DM record with ARMCD not found in Trial Arms (TA) domain" ;
+    prov:wasDerivedFrom "archetype_A08" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "DM.ARMCD value not found in TA domain" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:ARMCD ?armcd .
+                FILTER(STR(?armcd) != '' && STR(?armcd) != 'Scrnfail')
+                FILTER NOT EXISTS {
+                    ?ta a cave:TA ;
+                        cave:ARMCD ?ta_armcd .
+                    FILTER(STR(?ta_armcd) = STR(?armcd))
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A09: Assigned subject missing disposition (DS) records
+# Mutation: removes all DS records for one subject with ACTARMCD
+# Pattern: DM+DS cross-domain existence check
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A09 a sh:NodeShape ;
+    rdfs:label "A09: Missing disposition for assigned subject" ;
+    rdfs:comment "Detects subject with ACTARMCD in DM but no DS record" ;
+    prov:wasDerivedFrom "archetype_A09" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Subject has ACTARMCD but no DS (Disposition) record" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:ACTARMCD ?actarm .
+                FILTER(STR(?actarm) != '' && STR(?actarm) != 'Scrnfail')
+                FILTER NOT EXISTS {
+                    ?ds a cave:DS ;
+                        cave:USUBJID ?u .
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A10: RFXSTDTC mismatch with earliest EXSTDTC
+# Mutation: shifts DM.RFXSTDTC -7 days from min(EX.EXSTDTC)
+# Pattern: DM+EX cross-domain date comparison
+# Logic: RFXSTDTC should equal one of the subject's EXSTDTC values.
+#        Flag a violation if RFXSTDTC doesn't match ANY EX.EXSTDTC.
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A10 a sh:NodeShape ;
+    rdfs:label "A10: RFXSTDTC mismatch" ;
+    rdfs:comment "Detects DM.RFXSTDTC not matching any EX.EXSTDTC for the subject" ;
+    prov:wasDerivedFrom "archetype_A10" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "DM.RFXSTDTC does not match any EX.EXSTDTC — derivation mismatch" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:RFXSTDTC ?rfx .
+                FILTER(STR(?rfx) != '')
+                FILTER NOT EXISTS {
+                    ?ex a cave:EX ;
+                        cave:USUBJID ?u ;
+                        cave:EXSTDTC ?exdt .
+                    FILTER(STR(?rfx) = STR(?exdt))
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A11: RFXENDTC mismatch with latest EXENDTC
+# Mutation: shifts DM.RFXENDTC +7 days from max(EX.EXENDTC)
+# Pattern: DM+EX cross-domain date comparison
+# Logic: RFXENDTC should equal one of the subject's EXENDTC values.
+#        Flag if RFXENDTC doesn't match ANY EX.EXENDTC.
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A11 a sh:NodeShape ;
+    rdfs:label "A11: RFXENDTC mismatch" ;
+    rdfs:comment "Detects DM.RFXENDTC not matching any EX.EXENDTC for the subject" ;
+    prov:wasDerivedFrom "archetype_A11" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "DM.RFXENDTC does not match any EX.EXENDTC — derivation mismatch" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:RFXENDTC ?rfe .
+                FILTER(STR(?rfe) != '')
+                FILTER NOT EXISTS {
+                    ?ex a cave:EX ;
+                        cave:USUBJID ?u ;
+                        cave:EXENDTC ?exdt .
+                    FILTER(STR(?rfe) = STR(?exdt))
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A12: Death flag (DTHFL=Y) without Death Details (DD) domain records
+# Mutation: sets DTHFL='Y' without DD data
+# Note: No DD.xpt in pilot1. Shape checks for DTHFL=Y without any DS
+# disposition record indicating death — a reasonable proxy.
+# Pattern: DM+DS conditional existence
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A12 a sh:NodeShape ;
+    rdfs:label "A12: DTHFL=Y without death disposition" ;
+    rdfs:comment "Detects DTHFL=Y in DM without death-related DS disposition record" ;
+    prov:wasDerivedFrom "archetype_A12" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "DM.DTHFL=Y but no death-related DS record found" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:DTHFL ?dthfl .
+                FILTER(STR(?dthfl) = 'Y')
+                FILTER NOT EXISTS {
+                    ?ds a cave:DS ;
+                        cave:USUBJID ?u ;
+                        cave:DSDECOD ?dscode .
+                    FILTER(CONTAINS(UCASE(STR(?dscode)), 'DEATH'))
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A13: RACE=MULTIPLE without SUPPDM supplemental race records
+# Mutation: sets DM.RACE='MULTIPLE' without SUPPDM race qualifiers
+# Pattern: DM+SUPPDM conditional existence
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A13 a sh:NodeShape ;
+    rdfs:label "A13: RACE=MULTIPLE without SUPPDM" ;
+    rdfs:comment "Detects RACE=MULTIPLE in DM without SUPPDM race qualifier records" ;
+    prov:wasDerivedFrom "archetype_A13" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "DM.RACE=MULTIPLE but no SUPPDM race qualifier records" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:RACE ?race .
+                FILTER(STR(?race) = 'MULTIPLE')
+                FILTER NOT EXISTS {
+                    ?supp a cave:SUPPDM ;
+                        cave:USUBJID ?u ;
+                        cave:QNAM ?qnam .
+                    FILTER(CONTAINS(UCASE(STR(?qnam)), 'RACE'))
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A14: Assigned arm but no exposure (EX) record
+# Mutation: removes all EX records for one subject with ACTARMCD
+# Pattern: DM+EX conditional existence
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A14 a sh:NodeShape ;
+    rdfs:label "A14: Assigned subject without exposure" ;
+    rdfs:comment "Detects subject with ACTARMCD but no EX record" ;
+    prov:wasDerivedFrom "archetype_A14" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Subject has ACTARMCD but no EX (Exposure) record" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:ACTARMCD ?actarm .
+                FILTER(STR(?actarm) != '' && STR(?actarm) != 'Scrnfail')
+                FILTER NOT EXISTS {
+                    ?ex a cave:EX ;
+                        cave:USUBJID ?u .
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A15: RFSTDTC mismatch with first EXSTDTC
+# Mutation: shifts DM.RFSTDTC -5 days from min(EX.EXSTDTC)
+# Pattern: DM+EX cross-domain date comparison
+# Logic: RFSTDTC should equal one of the subject's EXSTDTC values.
+#        Flag if RFSTDTC doesn't match ANY EX.EXSTDTC.
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A15 a sh:NodeShape ;
+    rdfs:label "A15: RFSTDTC mismatch" ;
+    rdfs:comment "Detects DM.RFSTDTC not matching any EX.EXSTDTC for the subject" ;
+    prov:wasDerivedFrom "archetype_A15" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "DM.RFSTDTC does not match any EX.EXSTDTC — derivation mismatch" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:USUBJID ?u ;
+                    cave:RFSTDTC ?rfst .
+                FILTER(STR(?rfst) != '')
+                FILTER NOT EXISTS {
+                    ?ex a cave:EX ;
+                        cave:USUBJID ?u ;
+                        cave:EXSTDTC ?exdt .
+                    FILTER(STR(?rfst) = STR(?exdt))
+                }
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A17: ARMCD-ARM not one-to-one mapping
+# Mutation: changes ARM to 'CONFLICTING ARM NAME' for one subject
+# Pattern: DM self-join for cross-record consistency
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A17 a sh:NodeShape ;
+    rdfs:label "A17: ARMCD-ARM not one-to-one" ;
+    rdfs:comment "Detects subjects where ARMCD maps to different ARM values — 1:1 required" ;
+    prov:wasDerivedFrom "archetype_A17" ;
+    sh:targetClass cave:DM ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "ARMCD maps to multiple ARM values (not 1:1)" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:DM ;
+                    cave:ARMCD ?armcd ;
+                    cave:ARM ?arm1 .
+                ?other a cave:DM ;
+                    cave:ARMCD ?armcd ;
+                    cave:ARM ?arm2 .
+                FILTER($this != ?other)
+                FILTER(STR(?arm1) != STR(?arm2))
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A18: Non-target overall response misclassification
+# Mutation: same pattern as A06 (UNEQUIVOCAL PROGRESSION + SD)
+# Pattern: TR+RS cross-domain join
+# Note: A18 mutation is functionally identical to A06.
+#        The A06 shape will detect both A06 and A18 mutations.
+#        Included as separate shape for archetype tracking.
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A18 a sh:NodeShape ;
+    rdfs:label "A18: Non-target overall response misclassification" ;
+    rdfs:comment "Detects non-target lesion with UNEQUIVOCAL PROGRESSION but RS=SD" ;
+    prov:wasDerivedFrom "archetype_A18" ;
+    sh:targetClass cave:TR ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Non-target shows UNEQUIVOCAL PROGRESSION but RSORRES is SD (misclassified)" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:TR ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:TRTESTCD 'TUMSTATE' ;
+                    cave:TRORRES ?trorres .
+                FILTER(CONTAINS(UCASE(STR(?trorres)), 'UNEQUIVOCAL PROGRESSION'))
+                ?rs a cave:RS ;
+                    cave:USUBJID ?u ;
+                    cave:VISITNUM ?v ;
+                    cave:RSTESTCD 'OVRLRESP' ;
+                    cave:RSORRES ?resp .
+                FILTER(STR(?resp) != 'PD')
+            }
+        """
+    ] .
+
+# -----------------------------------------------------------------------------
+# A20: iRECIST immune PD confirmation failure
+# Mutation: adds iCPD RS record without confirmation within ≥4 weeks
+# Pattern: RS temporal self-join
+# -----------------------------------------------------------------------------
+cave:Shape_Archetype_A20 a sh:NodeShape ;
+    rdfs:label "A20: iCPD without confirmation" ;
+    rdfs:comment "Detects iCPD response without confirmatory iCPD at subsequent visit >=4 weeks later" ;
+    prov:wasDerivedFrom "archetype_A20" ;
+    sh:targetClass cave:RS ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "iCPD at this visit without confirmation at a subsequent visit" ;
+        sh:select """
+            SELECT $this WHERE {
+                $this a cave:RS ;
+                    cave:USUBJID ?u ;
+                    cave:RSTESTCD 'OVRLRESP' ;
+                    cave:RSORRES ?resp ;
+                    cave:VISITNUM ?v .
+                FILTER(STR(?resp) = 'iCPD')
+                FILTER NOT EXISTS {
+                    ?later a cave:RS ;
+                        cave:USUBJID ?u ;
+                        cave:RSTESTCD 'OVRLRESP' ;
+                        cave:RSORRES ?resp2 ;
+                        cave:VISITNUM ?v2 .
+                    FILTER(?v2 > ?v)
+                    FILTER(STR(?resp2) = 'iCPD')
+                }
+            }
+        """
+    ] .

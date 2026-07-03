@@ -1,0 +1,68 @@
+{
+  "benchmark": "scale_large_oxigraph",
+  "base_subjects": 306,
+  "base_triples": 87742,
+  "scale_results": [
+    {
+      "target_subjects": 1000,
+      "replication_factor": 3,
+      "subjects": 918,
+      "triples": 263226,
+      "graph_build_s": 2.48,
+      "store_load_s": 7.25,
+      "sparql_query_s": 4.56,
+      "oxigraph_detect_s": 11.81,
+      "archetype_flags": 5,
+      "query_throughput_subjects_per_s": 201.3,
+      "end_to_end_throughput_subjects_per_s": 77.8,
+      "query_ms_per_subject": 4.967,
+      "peak_rss_mb": 1474.5
+    },
+    {
+      "target_subjects": 2000,
+      "replication_factor": 7,
+      "subjects": 2142,
+      "triples": 614194,
+      "graph_build_s": 6.26,
+      "store_load_s": 19.81,
+      "sparql_query_s": 9.14,
+      "oxigraph_detect_s": 28.95,
+      "archetype_flags": 5,
+      "query_throughput_subjects_per_s": 234.3,
+      "end_to_end_throughput_subjects_per_s": 74.0,
+      "query_ms_per_subject": 4.268,
+      "peak_rss_mb": 3060.2
+    },
+    {
+      "target_subjects": 5000,
+      "replication_factor": 16,
+      "subjects": 4896,
+      "triples": 1403872,
+      "graph_build_s": 14.27,
+      "store_load_s": 52.72,
+      "sparql_query_s": 23.64,
+      "oxigraph_detect_s": 76.37,
+      "archetype_flags": 5,
+      "query_throughput_subjects_per_s": 207.1,
+      "end_to_end_throughput_subjects_per_s": 64.1,
+      "query_ms_per_subject": 4.829,
+      "peak_rss_mb": 6491.6
+    }
+  ],
+  "scaling": {
+    "sparql_query_exponent_loglog": 0.982,
+    "sparql_query_fit_r2": 0.9908,
+    "end_to_end_exponent_loglog": 1.115,
+    "end_to_end_fit_r2": 0.9991,
+    "detection_scaling_exponent_loglog": 0.982,
+    "sub_linear": true,
+    "fit_method": "least_squares_loglog_over_all_points",
+    "interpretation": "least-squares log-log slope of SPARQL detection time vs subject count over all sweep points; <1 sub-linear, ~1 linear, >1 super-linear. store_load (rdflib->oxigraph materialisation) is a separate one-time cost."
+  },
+  "structural_step": {
+    "subjects": 918,
+    "structural_pyshacl_s": 3.79,
+    "note": "rdflib/pyShACL structural (RECIST S1-S8 + domain) step \u2014 the remaining non-Oxigraph cost; scales with the reference stack."
+  },
+  "runtime_sec": 152.8
+}

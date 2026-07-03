@@ -1,0 +1,396 @@
+{
+  "seed": 42,
+  "backend": "oxigraph",
+  "max_subjects": 60,
+  "trials": {
+    "synta": {
+      "src": "data/real_sdtm/synta",
+      "n_subjects_full": 325,
+      "n_subjects_used": 60,
+      "not_applicable": [
+        "A03",
+        "A07",
+        "A09",
+        "A10",
+        "A11",
+        "A14",
+        "A15",
+        "A19",
+        "A20"
+      ],
+      "missingness": [
+        {
+          "missing_fraction": 0.0,
+          "archetype_flags": 3,
+          "crashed": false,
+          "seconds": 4.3,
+          "delta_vs_clean": 0
+        },
+        {
+          "missing_fraction": 0.1,
+          "archetype_flags": 3,
+          "crashed": false,
+          "seconds": 3.7,
+          "delta_vs_clean": 0
+        },
+        {
+          "missing_fraction": 0.25,
+          "archetype_flags": 0,
+          "crashed": false,
+          "seconds": 2.8,
+          "delta_vs_clean": -3
+        },
+        {
+          "missing_fraction": 0.5,
+          "archetype_flags": 1,
+          "crashed": false,
+          "seconds": 1.8,
+          "delta_vs_clean": -2
+        }
+      ],
+      "orphan_fk": {
+        "perturbations": [
+          "TR.TRLNKID orphaned x146",
+          "RS ghost USUBJID x1",
+          "TU rows dropped x63 (dangling TR)"
+        ],
+        "archetype_flags": 6,
+        "crashed": false,
+        "seconds": 4.1
+      },
+      "undefined_visits": {
+        "rows_corrupted": 210,
+        "crashed": false,
+        "a04_flags_baseline": 0,
+        "a04_flags_perturbed": 33,
+        "other_flags_baseline": 3,
+        "other_flags_perturbed": 2,
+        "a04_detected_corruption": true,
+        "other_shapes_stable": true,
+        "seconds": 5.4
+      },
+      "co_occurrence": [
+        {
+          "subject": "SYNTA-4783-08-141",
+          "k": 5,
+          "individually_detectable": [
+            "A04",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "co_occurring_injected": [
+            "A04",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "mutually_exclusive_excluded": [],
+          "jointly_detected": [
+            "A04",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "co_occurrence_recall": 1.0,
+          "seconds": 0.1
+        },
+        {
+          "subject": "SYNTA-4783-08-65",
+          "k": 5,
+          "individually_detectable": [
+            "A02",
+            "A04",
+            "A05",
+            "A06",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "co_occurring_injected": [
+            "A02",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "mutually_exclusive_excluded": [
+            "A04",
+            "A06"
+          ],
+          "jointly_detected": [
+            "A02",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "co_occurrence_recall": 1.0,
+          "seconds": 0.1
+        },
+        {
+          "subject": "SYNTA-4783-08-145",
+          "k": 5,
+          "individually_detectable": [
+            "A04",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "co_occurring_injected": [
+            "A04",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "mutually_exclusive_excluded": [],
+          "jointly_detected": [
+            "A04",
+            "A05",
+            "A08",
+            "A12",
+            "A13"
+          ],
+          "co_occurrence_recall": 1.0,
+          "seconds": 0.1
+        }
+      ]
+    },
+    "ca012": {
+      "src": "data/real_sdtm/ca012",
+      "n_subjects_full": 227,
+      "n_subjects_used": 60,
+      "not_applicable": [
+        "A03",
+        "A19"
+      ],
+      "missingness": [
+        {
+          "missing_fraction": 0.0,
+          "archetype_flags": 2,
+          "crashed": false,
+          "seconds": 4.2,
+          "delta_vs_clean": 0
+        },
+        {
+          "missing_fraction": 0.1,
+          "archetype_flags": 2,
+          "crashed": false,
+          "seconds": 3.8,
+          "delta_vs_clean": 0
+        },
+        {
+          "missing_fraction": 0.25,
+          "archetype_flags": 2,
+          "crashed": false,
+          "seconds": 3.0,
+          "delta_vs_clean": 0
+        },
+        {
+          "missing_fraction": 0.5,
+          "archetype_flags": 2,
+          "crashed": false,
+          "seconds": 2.2,
+          "delta_vs_clean": 0
+        }
+      ],
+      "orphan_fk": {
+        "perturbations": [
+          "TR.TRLNKID orphaned x117",
+          "RS ghost USUBJID x1",
+          "TU rows dropped x37 (dangling TR)"
+        ],
+        "archetype_flags": 3,
+        "crashed": false,
+        "seconds": 4.1
+      },
+      "undefined_visits": {
+        "rows_corrupted": 192,
+        "crashed": false,
+        "a04_flags_baseline": 0,
+        "a04_flags_perturbed": 42,
+        "other_flags_baseline": 2,
+        "other_flags_perturbed": 5,
+        "a04_detected_corruption": true,
+        "other_shapes_stable": false,
+        "seconds": 5.0
+      },
+      "co_occurrence": [
+        {
+          "subject": "CA012-109",
+          "k": 10,
+          "individually_detectable": [
+            "A02",
+            "A04",
+            "A05",
+            "A06",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "co_occurring_injected": [
+            "A02",
+            "A05",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "mutually_exclusive_excluded": [
+            "A04",
+            "A06"
+          ],
+          "jointly_detected": [
+            "A02",
+            "A05",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "co_occurrence_recall": 1.0,
+          "seconds": 0.1
+        },
+        {
+          "subject": "CA012-177",
+          "k": 10,
+          "individually_detectable": [
+            "A02",
+            "A04",
+            "A05",
+            "A06",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "co_occurring_injected": [
+            "A02",
+            "A05",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "mutually_exclusive_excluded": [
+            "A04",
+            "A06"
+          ],
+          "jointly_detected": [
+            "A02",
+            "A05",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "co_occurrence_recall": 1.0,
+          "seconds": 0.1
+        },
+        {
+          "subject": "CA012-85",
+          "k": 10,
+          "individually_detectable": [
+            "A02",
+            "A04",
+            "A05",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "co_occurring_injected": [
+            "A02",
+            "A05",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "mutually_exclusive_excluded": [
+            "A04"
+          ],
+          "jointly_detected": [
+            "A02",
+            "A05",
+            "A08",
+            "A09",
+            "A10",
+            "A11",
+            "A12",
+            "A13",
+            "A14",
+            "A15"
+          ],
+          "co_occurrence_recall": 1.0,
+          "seconds": 0.1
+        }
+      ]
+    }
+  },
+  "summary": {
+    "synta": {
+      "no_crash_all_experiments": true,
+      "missingness_max_flag_increase": 0,
+      "undefined_visit_a04_caught": true,
+      "undefined_visit_other_flag_delta": -1,
+      "co_occurrence_recall": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "co_occurrence_min_recall": 1.0
+    },
+    "ca012": {
+      "no_crash_all_experiments": true,
+      "missingness_max_flag_increase": 0,
+      "undefined_visit_a04_caught": true,
+      "undefined_visit_other_flag_delta": 3,
+      "co_occurrence_recall": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "co_occurrence_min_recall": 1.0
+    }
+  },
+  "runtime_sec": 66.1
+}

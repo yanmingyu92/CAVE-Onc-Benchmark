@@ -1,0 +1,75 @@
+{
+  "tag": "synta",
+  "backend": "oxigraph",
+  "n_subjects_total": 325,
+  "n_subjects_run": 325,
+  "triples": 119895,
+  "conforms": false,
+  "report_is_graph": true,
+  "total_flags": 5601,
+  "bucket_totals": {
+    "recist_derivation": 106,
+    "archetype": 21,
+    "core_structural": 1932,
+    "anon_property": 3542
+  },
+  "flags_per_shape": {
+    "nb281ba43d66745039c6372f57baf34e5b317": 322,
+    "nb281ba43d66745039c6372f57baf34e5b318": 322,
+    "nb281ba43d66745039c6372f57baf34e5b276": 322,
+    "nb281ba43d66745039c6372f57baf34e5b344": 322,
+    "nb281ba43d66745039c6372f57baf34e5b345": 322,
+    "Shape_CORE-000191": 322,
+    "nb281ba43d66745039c6372f57baf34e5b338": 322,
+    "nb281ba43d66745039c6372f57baf34e5b339": 322,
+    "Shape_CORE-000223": 322,
+    "nb281ba43d66745039c6372f57baf34e5b341": 322,
+    "nb281ba43d66745039c6372f57baf34e5b342": 322,
+    "Shape_CORE-000224": 322,
+    "nb281ba43d66745039c6372f57baf34e5b408": 322,
+    "nb281ba43d66745039c6372f57baf34e5b409": 322,
+    "Shape_CORE-000452": 321,
+    "Shape_CORE-000189": 321,
+    "Shape_CORE-000883": 321,
+    "Shape_RECIST_S1_sld_math": 62,
+    "Shape_Archetype_A01": 19,
+    "Shape_RECIST_S5_target_sd": 17,
+    "Shape_RECIST_S4_target_pd": 10,
+    "Shape_RECIST_S8_ne_propagation": 10,
+    "Shape_RECIST_S3_target_pr": 6,
+    "Shape_Archetype_A02": 2,
+    "Shape_CORE-000648": 1,
+    "Shape_CORE-001043": 1,
+    "Shape_CORE-000645": 1,
+    "Shape_RECIST_S2_target_cr": 1
+  },
+  "recist_signal_shapes": {
+    "Shape_RECIST_S1_sld_math": 62,
+    "Shape_RECIST_S5_target_sd": 17,
+    "Shape_RECIST_S4_target_pd": 10,
+    "Shape_RECIST_S8_ne_propagation": 10,
+    "Shape_RECIST_S3_target_pr": 6,
+    "Shape_RECIST_S2_target_cr": 1
+  },
+  "archetype_shapes": {
+    "Shape_Archetype_A01": 19,
+    "Shape_Archetype_A02": 2
+  },
+  "flagged_subjects": 322,
+  "top_flagged_subjects": {
+    "SYNTA-4783-08-257": 23,
+    "SYNTA-4783-08-232": 23,
+    "SYNTA-4783-08-28": 21,
+    "SYNTA-4783-08-14": 21,
+    "SYNTA-4783-08-321": 21,
+    "SYNTA-4783-08-224": 20,
+    "SYNTA-4783-08-223": 20,
+    "SYNTA-4783-08-168": 20,
+    "SYNTA-4783-08-124": 20,
+    "SYNTA-4783-08-187": 20
+  },
+  "timing_sec": {
+    "load": 2.4,
+    "validate": 88.2
+  }
+}

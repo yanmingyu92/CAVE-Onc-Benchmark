@@ -1,0 +1,34 @@
+{
+  "generated": "2026-05-06T14:34:13.529026+00:00",
+  "purpose": "Pre-registration artifact integrity verification",
+  "files": {
+    "docs/osf_preregistration.md": {
+      "sha256": "444cbcd4045f4696cc12471e22b78b6fd98b105cf61ef90c8ffc150feb280b80",
+      "size_bytes": 8774
+    },
+    "docs/statistical_analysis_plan.md": {
+      "sha256": "56e392306f74d69f74b88384bb6b14e01cce2b4654d9dffa2ef9342256eec538",
+      "size_bytes": 4429
+    },
+    "docs/frozen_archetype_list.csv": {
+      "sha256": "144b4edf2411c8a06037c28fbdea4c24c784e0d144073b02bdb84fc40bc73d96",
+      "size_bytes": 4502
+    },
+    "gate_b/archetypes.csv": {
+      "sha256": "144b4edf2411c8a06037c28fbdea4c24c784e0d144073b02bdb84fc40bc73d96",
+      "size_bytes": 4502
+    },
+    "data/MANIFEST.sha256": {
+      "sha256": "618c6368d222a5c9e77f0a962334fd5a87e06cc0f307cc43cd82b6e684ff52c6",
+      "size_bytes": 2350
+    },
+    "eval/track_a_results.json": {
+      "sha256": "ca617d3743ded6dc79ede2a964f84c97a1c1b9fb940731252cb615655b536a92",
+      "size_bytes": 2118
+    },
+    "eval/track_b_results.json": {
+      "sha256": "1babe3bc8ad5a3351f9bf754956ae3d1d0162f5fd67633c39583a03080b645f3",
+      "size_bytes": 6331
+    }
+  }
+}

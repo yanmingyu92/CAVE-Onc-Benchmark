@@ -1,0 +1,42 @@
+{
+  "benchmark": "G3_scale",
+  "data_source": "C:\\Users\\yanmi\\Downloads\\CDISC_rule_graph\\data\\pharmaversesdtm_recist",
+  "base_subjects": 8,
+  "base_triples": 12463,
+  "base_load_time_s": 0.4,
+  "scale_results": [
+    {
+      "scale_factor": 1,
+      "label": "1x",
+      "subjects": 8,
+      "triples": 12463,
+      "scale_time_s": 0.0,
+      "validation_time_s": 42.2,
+      "violations": 2,
+      "time_per_subject_s": 5.276,
+      "ratio_vs_1x": 1.0
+    },
+    {
+      "scale_factor": 5,
+      "label": "5x",
+      "subjects": 40,
+      "triples": 62315,
+      "scale_time_s": 0.54,
+      "validation_time_s": 114.66,
+      "violations": 2,
+      "time_per_subject_s": 2.866,
+      "ratio_vs_1x": 2.72
+    },
+    {
+      "scale_factor": 10,
+      "label": "10x",
+      "subjects": 80,
+      "triples": 124630,
+      "scale_time_s": 1.1,
+      "validation_time_s": 326.85,
+      "violations": 2,
+      "time_per_subject_s": 4.086,
+      "ratio_vs_1x": 7.75
+    }
+  ]
+}

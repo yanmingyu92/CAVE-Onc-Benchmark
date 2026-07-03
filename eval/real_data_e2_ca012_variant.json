@@ -1,0 +1,20 @@
+{
+  "src": "data/real_sdtm/ca012",
+  "backend": "oxigraph",
+  "injector": "schedule_aware_variant",
+  "note": "robustness check; validated bench.mutations + headline recall unchanged",
+  "archetypes": {
+    "A07": {
+      "status": "detected",
+      "candidates_tried": 10,
+      "candidates_detected": 6,
+      "usubjid": "CA012-100"
+    },
+    "A20": {
+      "status": "detected",
+      "candidates_tried": 10,
+      "candidates_detected": 9,
+      "usubjid": "CA012-1"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@prefix cave: <https://cave-onc.org/shacl/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+cave:Shape_CORE-000005 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000005; demorgan; operators: equal_to,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000005" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "PLACEBO"^^xsd:string ] ;
+                        sh:path cave:EXTRT ] ] [ sh:property [ sh:hasValue 0 ;
+                        sh:path cave:EXDOSE ] ] ) ;
+    sh:targetClass cave:EX .
+
+
+cave:Shape_CORE-000326 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000326; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000326" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:EXMETHOD ] ;
+    sh:targetClass cave:EX .
+
+
+cave:Shape_CORE-000385 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000385; demorgan; operators: empty" ;
+    prov:wasDerivedFrom "CORE-000385" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path <https://cave-onc.org/shacl/--STDTC> ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path <https://cave-onc.org/shacl/--STDY> ] ] ) ;
+    sh:targetClass cave:EX .
+
+
+cave:Shape_CORE-000445 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000445; demorgan; operators: non_empty" ;
+    prov:wasDerivedFrom "CORE-000445" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:EXDOSTXT ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:EXDOSE ] ] ) ;
+    sh:targetClass cave:EX .
+
+
+cave:Shape_CORE-000599 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000599; demorgan; operators: equal_to,non_empty" ;
+    prov:wasDerivedFrom "CORE-000599" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue 0 ] ;
+                        sh:path cave:EXDOSE ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:EXLOT ] ] ) ;
+    sh:targetClass cave:EX .

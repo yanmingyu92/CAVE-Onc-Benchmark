@@ -1,0 +1,126 @@
+[
+  {
+    "archetype": "A04",
+    "model_verdicts": [
+      {
+        "model": "deepseek-v3",
+        "verdict": "protocol_dependent",
+        "confidence": 0.85,
+        "rationale": "Visit number mismatches between TR/RS and EX domains are often due to protocol-allowed flexible visit windows or scheduling differences, not necessarily data errors. The context explicitly notes this possibility, making the finding protocol-dependent rather than a genuine violation or false alarm."
+      },
+      {
+        "model": "gpt-4o",
+        "verdict": "protocol_dependent",
+        "confidence": 0.85,
+        "rationale": "The mismatch in visit numbers between TR/RS and EX domains could be due to flexible visit windows allowed by the study protocol. This is common in oncology trials where assessments and treatments may not align perfectly due to patient scheduling or clinical considerations. Without specific protocol details, it's unclear if this is a violation, hence it is protocol-dependent."
+      },
+      {
+        "model": "claude-sonnet-4",
+        "verdict": "protocol_dependent",
+        "confidence": 0.85,
+        "rationale": "Visit number mismatches between TR/RS and EX domains are highly dependent on protocol design. Many oncology protocols allow flexible visit windows, unscheduled assessments, or different dosing schedules that can legitimately result in different visit sequences across domains. This requires protocol review to determine if the mismatch represents actual scheduling flexibility or a data mapping error."
+      },
+      {
+        "model": "glm-4.6",
+        "verdict": "protocol_dependent",
+        "confidence": 0.95,
+        "rationale": "Visit mapping discrepancies between domains (e.g., Tumor Response [TR] and Exposure [EX]) are common in oncology trials due to differing visit reference structures (e.g., Cycle Day vs. Visit Number) or protocol-defined windows. Without reviewing the specific protocol's schedule of assessments and mapping rules, it cannot be determined if this is a true data error or an expected variance in visit sequencing."
+      }
+    ],
+    "consensus": "protocol_dependent",
+    "agreement_rate": 1.0
+  },
+  {
+    "archetype": "A07",
+    "model_verdicts": [
+      {
+        "model": "deepseek-v3",
+        "verdict": "protocol_dependent",
+        "confidence": 0.9,
+        "rationale": "RECIST 1.1 generally requires confirmation of PR, but many oncology protocols modify this requirement (e.g., no confirmation needed for certain trials, or confirmation only required for CR). Early discontinuation before the confirmation window can also explain the absence of a confirmatory assessment without being a data error. Therefore, the validity of this finding depends on the specific protocol language and subject disposition."
+      },
+      {
+        "model": "gpt-4o",
+        "verdict": "protocol_dependent",
+        "confidence": 0.85,
+        "rationale": "The finding is potentially protocol-dependent because some study protocols may modify RECIST 1.1 criteria to waive the requirement for a confirmation visit for Partial Response (PR). Additionally, if the subject discontinued before the confirmation window, it may not be a data error. Therefore, without specific protocol details, this cannot be classified as a genuine violation."
+      },
+      {
+        "model": "claude-sonnet-4",
+        "verdict": "protocol_dependent",
+        "confidence": 0.85,
+        "rationale": "While RECIST 1.1 standard requires PR confirmation, many oncology protocols modify these criteria or have specific discontinuation rules. The finding explicitly notes that protocols may waive confirmation requirements and early discontinuation could be legitimate. Without reviewing the specific protocol's response criteria and discontinuation procedures, this cannot be definitively classified as a violation."
+      },
+      {
+        "model": "glm-4.6",
+        "verdict": "protocol_dependent",
+        "confidence": 1.0,
+        "rationale": "While RECIST 1.1 generally requires confirmation of a Partial Response (PR) to ensure durability of response, oncology study protocols frequently implement modified criteria (e.g., allowing confirmation to be waived or using different timeframes). Furthermore, a subject may discontinue treatment or withdraw consent before the confirmation visit can occur, which is a valid clinical scenario rather than a data error. Therefore, this cannot be classified as a violation without reviewing the specific protocol's response evaluation criteria and the subject's disposition status."
+      }
+    ],
+    "consensus": "protocol_dependent",
+    "agreement_rate": 1.0
+  },
+  {
+    "archetype": "A12",
+    "model_verdicts": [
+      {
+        "model": "deepseek-v3",
+        "verdict": "protocol_dependent",
+        "confidence": 0.85,
+        "rationale": "While a missing death date or AE record for a deceased subject is often a data quality issue, some protocols capture death via a dedicated death CRF (e.g., DS or a separate form) rather than in DM.DTHDTC or as an AE. Additionally, deaths occurring after the study observation window may not require AE reporting. Therefore, the validity of this finding depends on the specific protocol's data collection and reporting requirements."
+      },
+      {
+        "model": "gpt-4o",
+        "verdict": "protocol_dependent",
+        "confidence": 0.8,
+        "rationale": "The absence of a death date in DM or an adverse event in AE could be due to protocol-specific data collection methods, such as using a separate death CRF or the death occurring outside the study observation window. This makes the finding potentially protocol-dependent."
+      },
+      {
+        "model": "claude-sonnet-4",
+        "verdict": "protocol_dependent",
+        "confidence": 0.85,
+        "rationale": "Death recording mechanisms vary significantly across oncology protocols. Some use separate death CRFs, others capture through AE domain, and some may not require death dates for deaths occurring post-study. The disposition status alone is insufficient to determine if this represents a data quality issue without understanding the protocol's specific death reporting requirements and study observation windows."
+      },
+      {
+        "model": "glm-4.6",
+        "verdict": "protocol_dependent",
+        "confidence": 0.95,
+        "rationale": "While a missing death date (DTHDTC) or adverse event (AE) for a subject with a disposition of death (DSCAT='DEAD') is a common data anomaly, it is not inherently a data quality violation without reviewing the protocol. Oncology studies often utilize distinct data capture mechanisms for survival status, such as a separate 'Death' CRF or a Post-Treatment Follow-up form, which may populate SDTM variables differently or map to a different domain than AE. Additionally, if the death occurred outside the defined study observation window, the absence of an AE record is protocol-compliant. Therefore, the validity of this finding is strictly dependent on the specific data collection plan defined in the protocol."
+      }
+    ],
+    "consensus": "protocol_dependent",
+    "agreement_rate": 1.0
+  },
+  {
+    "archetype": "A20",
+    "model_verdicts": [
+      {
+        "model": "deepseek-v3",
+        "verdict": "protocol_dependent",
+        "confidence": 0.95,
+        "rationale": "The finding explicitly states that iRECIST confirmation requirements are not universally adopted and that many studies use RECIST 1.1. The applicability of this check depends entirely on whether the study protocol mandates iRECIST or RECIST 1.1. Therefore, it is protocol-dependent."
+      },
+      {
+        "model": "gpt-4o",
+        "verdict": "protocol_dependent",
+        "confidence": 0.9,
+        "rationale": "The finding is dependent on whether the study protocol specifies the use of iRECIST criteria. If the protocol only requires RECIST 1.1, then the iRECIST confirmation requirement is not applicable. Therefore, this is not a genuine violation but rather a protocol-dependent issue."
+      },
+      {
+        "model": "claude-sonnet-4",
+        "verdict": "protocol_dependent",
+        "confidence": 0.95,
+        "rationale": "This is clearly protocol-dependent. iRECIST confirmation requirements only apply when the study protocol specifically mandates iRECIST criteria. Many oncology studies legitimately use standard RECIST 1.1, which has different confirmation requirements. The validation rule should only flag violations when iRECIST is the protocol-specified response assessment method."
+      },
+      {
+        "model": "glm-4.6",
+        "verdict": "protocol_dependent",
+        "confidence": 1.0,
+        "rationale": "The validity of this finding is entirely contingent upon the assessment criteria defined in the study protocol. Since iRECIST is a specific modification of RECIST 1.1 and not universally adopted, applying iRECIST confirmation rules to a study designed solely for RECIST 1.1 would be incorrect. Therefore, this cannot be classified as a genuine violation without verifying the protocol-specified tumor assessment guidelines."
+      }
+    ],
+    "consensus": "protocol_dependent",
+    "agreement_rate": 1.0
+  }
+]

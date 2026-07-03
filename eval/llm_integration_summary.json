@@ -1,0 +1,14 @@
+{
+  "tier1_verification": {
+    "subjects_tested": 32,
+    "error": null
+  },
+  "tier2_explanations": {
+    "archetypes_explained": 20,
+    "error": null
+  },
+  "tier3_triage": {
+    "archetypes_triaged": 4,
+    "error": null
+  }
+}

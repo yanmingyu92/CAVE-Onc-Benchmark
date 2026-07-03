@@ -1,0 +1,132 @@
+{
+  "l3_timing_decomposition": {
+    "l3_a19_injected_s": 0.0255,
+    "l3_a19_traces": 3,
+    "l3_clean_derivation_only_s": 0.0303,
+    "l3_clean_traces": 2,
+    "n_rs_subjects": 8,
+    "per_subject_derivation_ms": 3.783,
+    "emit_overhead_ms": -4.752,
+    "interpretation": "The ~25 ms per archetype is the FULL L3 derivation (query RS for OVRLRESP/NTOVRLRESP/NEWLEC + Table 7 lookup + compare) executed over ALL subjects on EVERY run. It is not 'routing for 19 + inference for A19'; the agent has no inference-skipping fast path. The '5% invocation rate' refers to DETECTION (1/20 archetypes emit a trace), not compute (compute is incurred on 20/20 runs)."
+  },
+  "backend_speedup_rdflib_vs_oxigraph": {
+    "n_queries": 18,
+    "n_comparable": 18,
+    "rdflib_total_s": 48.5989,
+    "oxigraph_total_s": 1.4018,
+    "aggregate_speedup": 34.67,
+    "median_speedup": 32.3,
+    "min_speedup": 1.99,
+    "max_speedup": 3306.04,
+    "per_query": [
+      {
+        "shape": "Shape_Archetype_AXX",
+        "rdflib_s": 14.6141,
+        "oxigraph_s": 0.3043,
+        "speedup": 48.03
+      },
+      {
+        "shape": "Shape_Archetype_A02",
+        "rdflib_s": 0.1937,
+        "oxigraph_s": 0.0231,
+        "speedup": 8.38
+      },
+      {
+        "shape": "Shape_Archetype_A03",
+        "rdflib_s": 15.8149,
+        "oxigraph_s": 0.0562,
+        "speedup": 281.15
+      },
+      {
+        "shape": "Shape_Archetype_A04",
+        "rdflib_s": 0.0099,
+        "oxigraph_s": 0.0003,
+        "speedup": 32.3
+      },
+      {
+        "shape": "Shape_Archetype_A05",
+        "rdflib_s": 0.0068,
+        "oxigraph_s": 0.0034,
+        "speedup": 1.99
+      },
+      {
+        "shape": "Shape_Archetype_A06",
+        "rdflib_s": 0.1674,
+        "oxigraph_s": 0.002,
+        "speedup": 82.49
+      },
+      {
+        "shape": "Shape_Archetype_A07",
+        "rdflib_s": 0.0338,
+        "oxigraph_s": 0.0096,
+        "speedup": 3.54
+      },
+      {
+        "shape": "Shape_Archetype_A08",
+        "rdflib_s": 0.0939,
+        "oxigraph_s": 0.0416,
+        "speedup": 2.26
+      },
+      {
+        "shape": "Shape_Archetype_A09",
+        "rdflib_s": 1.715,
+        "oxigraph_s": 0.1164,
+        "speedup": 14.73
+      },
+      {
+        "shape": "Shape_Archetype_A10",
+        "rdflib_s": 1.7533,
+        "oxigraph_s": 0.2583,
+        "speedup": 6.79
+      },
+      {
+        "shape": "Shape_Archetype_A11",
+        "rdflib_s": 1.7305,
+        "oxigraph_s": 0.2057,
+        "speedup": 8.41
+      },
+      {
+        "shape": "Shape_Archetype_A12",
+        "rdflib_s": 1.7357,
+        "oxigraph_s": 0.0036,
+        "speedup": 488.12
+      },
+      {
+        "shape": "Shape_Archetype_A13",
+        "rdflib_s": 3.7054,
+        "oxigraph_s": 0.0011,
+        "speedup": 3306.04
+      },
+      {
+        "shape": "Shape_Archetype_A14",
+        "rdflib_s": 1.6672,
+        "oxigraph_s": 0.0742,
+        "speedup": 22.48
+      },
+      {
+        "shape": "Shape_Archetype_A15",
+        "rdflib_s": 1.618,
+        "oxigraph_s": 0.2418,
+        "speedup": 6.69
+      },
+      {
+        "shape": "Shape_Archetype_A17",
+        "rdflib_s": 3.4493,
+        "oxigraph_s": 0.058,
+        "speedup": 59.51
+      },
+      {
+        "shape": "Shape_Archetype_A18",
+        "rdflib_s": 0.1598,
+        "oxigraph_s": 0.0012,
+        "speedup": 134.99
+      },
+      {
+        "shape": "Shape_Archetype_A20",
+        "rdflib_s": 0.1301,
+        "oxigraph_s": 0.0011,
+        "speedup": 122.95
+      }
+    ]
+  }
+}

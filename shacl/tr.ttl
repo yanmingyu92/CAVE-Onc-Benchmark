@@ -1,0 +1,42 @@
+@prefix cave: <https://cave-onc.org/shacl/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+cave:Shape_CORE-000003 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000003; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000003" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:TRLOC ] ;
+    sh:targetClass cave:TR .
+
+
+cave:Shape_CORE-000076 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000076; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000076" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:TRPORTOT ] ;
+    sh:targetClass cave:TR .
+
+
+cave:Shape_CORE-000077 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000077; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000077" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:TRDIR ] ;
+    sh:targetClass cave:TR .
+
+
+cave:Shape_CORE-000078 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000078; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000078" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:TRLAT ] ;
+    sh:targetClass cave:TR .

@@ -1,0 +1,42 @@
+{
+  "archetype": "A19",
+  "equivalence_check": {
+    "l3_traces": 3,
+    "l3_detected": true,
+    "sparql_violations": 12,
+    "sparql_detected": true,
+    "equivalent": true
+  },
+  "langgraph_l3": {
+    "files": [
+      "agent\\orchestrator.py",
+      "agent\\table7.py"
+    ],
+    "loc": 337,
+    "sloc": 241,
+    "lloc": 206,
+    "comments": 22,
+    "total_cyclomatic_complexity": 62,
+    "n_blocks": 22,
+    "avg_cyclomatic_complexity": 2.82,
+    "max_cyclomatic_complexity": 7,
+    "table7_matrix_rows": 34,
+    "unit_testable_subcomponents": 22
+  },
+  "shacl_sparql": {
+    "file": "docs\\latex\\plos_submission\\analysis\\a19_table7_sparql_equivalent.ttl",
+    "shape_file_loc": 36,
+    "select_sloc": 20,
+    "table7_matrix_branches": 34,
+    "normalisation_ifs": 3,
+    "cross_record_joins": 3,
+    "filter_count": 2,
+    "bind_count": 4,
+    "if_count": 37,
+    "boolean_or_count": 2,
+    "not_exists_count": 0,
+    "branch_points": 41,
+    "max_if_nesting_depth": 34,
+    "unit_testable_subcomponents": 0
+  }
+}

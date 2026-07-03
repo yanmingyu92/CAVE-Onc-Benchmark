@@ -1,0 +1,213 @@
+{
+  "tag": "synta_e2",
+  "backend": "oxigraph",
+  "src": "data/real_sdtm/synta",
+  "n_subjects": 325,
+  "candidates_per_archetype": 10,
+  "clean_baseline_l1_flags": 5652,
+  "summary": {
+    "archetypes_total": 20,
+    "applicable": 11,
+    "detected": 10,
+    "missed": 1,
+    "not_applicable": 9,
+    "recall_on_applicable": 0.909,
+    "detected_ids": [
+      "A01",
+      "A02",
+      "A04",
+      "A05",
+      "A06",
+      "A08",
+      "A12",
+      "A13",
+      "A16",
+      "A17"
+    ],
+    "missed_ids": [
+      "A18"
+    ],
+    "not_applicable_ids": [
+      "A03",
+      "A07",
+      "A09",
+      "A10",
+      "A11",
+      "A14",
+      "A15",
+      "A19",
+      "A20"
+    ]
+  },
+  "archetypes": [
+    {
+      "archetype_id": "A01",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 1,
+      "usubjid": "SYNTA-4783-08-101",
+      "seconds": 3.0
+    },
+    {
+      "archetype_id": "A02",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 5,
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 2.8
+    },
+    {
+      "archetype_id": "A03",
+      "status": "not_applicable",
+      "reason": "requires an AE domain (not mapped for this trial)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A04",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 2.9
+    },
+    {
+      "archetype_id": "A05",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 2.8
+    },
+    {
+      "archetype_id": "A06",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 5,
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 3.1
+    },
+    {
+      "archetype_id": "A07",
+      "status": "not_applicable",
+      "reason": "requires fine-grained RSDTC dates (absent / year-only)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A08",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 2.9
+    },
+    {
+      "archetype_id": "A09",
+      "status": "not_applicable",
+      "reason": "requires DM.ACTARMCD (not mapped for this trial)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A10",
+      "status": "not_applicable",
+      "reason": "requires an EX domain (absent from this trial's RECIST package)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A11",
+      "status": "not_applicable",
+      "reason": "requires an EX domain (absent from this trial's RECIST package)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A12",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 5,
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 3.0
+    },
+    {
+      "archetype_id": "A13",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 3.0
+    },
+    {
+      "archetype_id": "A14",
+      "status": "not_applicable",
+      "reason": "requires EX + DM.ACTARMCD (absent from this trial's RECIST package)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A15",
+      "status": "not_applicable",
+      "reason": "requires an EX domain (absent from this trial's RECIST package)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A16",
+      "status": "detected",
+      "detection_source": "L1_structural",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "new_shapes_on_subject": [
+        "n6e0b7cc853c54d748d0547d3396c69eeb276",
+        "n6e0b7cc853c54d748d0547d3396c69eeb317",
+        "n6e0b7cc853c54d748d0547d3396c69eeb318",
+        "n6e0b7cc853c54d748d0547d3396c69eeb338",
+        "n6e0b7cc853c54d748d0547d3396c69eeb339",
+        "n6e0b7cc853c54d748d0547d3396c69eeb341",
+        "n6e0b7cc853c54d748d0547d3396c69eeb342",
+        "n6e0b7cc853c54d748d0547d3396c69eeb344",
+        "n6e0b7cc853c54d748d0547d3396c69eeb345",
+        "n6e0b7cc853c54d748d0547d3396c69eeb408",
+        "n6e0b7cc853c54d748d0547d3396c69eeb409"
+      ],
+      "usubjid": "SYNTA-4783-08-1",
+      "seconds": 3.0
+    },
+    {
+      "archetype_id": "A17",
+      "status": "detected",
+      "detection_source": "L1",
+      "usubjid": "SYNTA-4783-08-1",
+      "description": "ARM changed for ARMCD=PACLITAX \u2192 not 1:1",
+      "total_flag_delta": 325,
+      "seconds": 91.9
+    },
+    {
+      "archetype_id": "A18",
+      "status": "missed",
+      "detection_source": "",
+      "candidates_tried": 10,
+      "candidates_detected": 0,
+      "seconds": 3.2
+    },
+    {
+      "archetype_id": "A19",
+      "status": "not_applicable",
+      "reason": "L3 Table-7 needs a single overall-RS row + NTOVRLRESP/NEWLEC codes; real-trial RS is multi-row and lacks them (would need synthetic enrichment)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A20",
+      "status": "not_applicable",
+      "reason": "requires fine-grained RSDTC dates for iRECIST confirmation",
+      "seconds": 0.0
+    }
+  ],
+  "timing_sec": {
+    "baseline": 90.7,
+    "total": 212.3
+  }
+}

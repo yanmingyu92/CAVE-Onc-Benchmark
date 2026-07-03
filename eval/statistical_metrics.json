@@ -1,0 +1,217 @@
+{
+  "track_b_detection": {
+    "n_archetypes": 20,
+    "cave_detected": 20,
+    "detection_rate": 1.0,
+    "detection_rate_pct": "100%",
+    "exact_binomial_95ci": [
+      0.8316,
+      1.0
+    ],
+    "exact_binomial_95ci_pct": "[83.2%, 100.0%]",
+    "l1_detected": 19,
+    "l3_detected": 1,
+    "l3_only": 1,
+    "undetected": []
+  },
+  "core_baseline": {
+    "source": "eval/core_p21_benchmark.json (real CORE v0.15 run, SDTMIG 3.4)",
+    "core_detected_all": 8,
+    "core_detected_all_str": "8/20",
+    "note": "All CORE detections fall among the ten CORE-seeded structural archetypes (A08-A17); CORE detects 0/10 of the non-CORE cross-domain class."
+  },
+  "mcnemar_cave_vs_core": {
+    "scope": "all_20_archetypes",
+    "cave_only_catches": 12,
+    "core_only_catches": 0,
+    "discordant_pairs": 12,
+    "p_value": 0.000488,
+    "significant_at_005": true,
+    "interpretation": "CAVE 20/20 vs CORE 8/20; 12 discordant pairs (b=12, c=0); McNemar's exact p=0.000488"
+  },
+  "mcnemar_cave_vs_core_noncore": {
+    "scope": "noncore_crossdomain_subset",
+    "n": 10,
+    "cave_detected": 10,
+    "core_detected": 0,
+    "cave_only_catches": 10,
+    "core_only_catches": 0,
+    "discordant_pairs": 10,
+    "p_value": 0.001953,
+    "significant_at_005": true,
+    "interpretation": "On the 10 non-CORE cross-domain archetypes, CAVE 10/10 vs CORE 0/10; McNemar's exact p=0.001953"
+  },
+  "p21_fda_baseline": {
+    "source": "eval/p21_fda_benchmark.json (branded Pinnacle 21 Community FDA engine, FDA 2405.2, SDTMIG 3.4)",
+    "p21_detected_all": 6,
+    "p21_detected_all_str": "6/20",
+    "p21_detected_noncore": 0,
+    "note": "The industry-standard FDA production engine, like the open CORE engine, detects 0/10 of the non-CORE cross-domain class; its detections are all CORE-seeded structural checks."
+  },
+  "mcnemar_cave_vs_p21_fda": {
+    "scope": "all_20_archetypes",
+    "cave_only_catches": 14,
+    "p21_only_catches": 0,
+    "discordant_pairs": 14,
+    "p_value": 0.000122,
+    "significant_at_005": true,
+    "interpretation": "CAVE 20/20 vs P21 FDA 6/20; 14 discordant; McNemar's exact p=0.000122"
+  },
+  "mcnemar_cave_vs_p21_fda_noncore": {
+    "scope": "noncore_crossdomain_subset",
+    "n": 10,
+    "cave_detected": 10,
+    "p21_detected": 0,
+    "p_value": 0.001953,
+    "significant_at_005": true,
+    "interpretation": "On the 10 non-CORE archetypes, CAVE 10/10 vs P21 FDA 0/10; McNemar's exact p=0.001953"
+  },
+  "mcnemar_ablation_l1_vs_cave": {
+    "l3_adds": 1,
+    "l1_only_catches_cave_misses": 0,
+    "p_value": 1.0
+  },
+  "detection_metrics": {
+    "true_positives": 20,
+    "false_negatives": 0,
+    "archetype_precision": 1.0,
+    "archetype_recall": 1.0,
+    "archetype_f1": 1.0
+  },
+  "bootstrap_ci": {
+    "n_bootstrap": 1000,
+    "seed": 42,
+    "detection_rate_95ci": [
+      1.0,
+      1.0
+    ],
+    "detection_rate_95ci_pct": "[100.0%, 100.0%]",
+    "f1_95ci": [
+      1.0,
+      1.0
+    ],
+    "f1_95ci_pct": "[100.0%, 100.0%]"
+  },
+  "per_archetype": {
+    "A01": {
+      "detected": true,
+      "source": "L1",
+      "delta": 3,
+      "l3_traces": 0
+    },
+    "A02": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A03": {
+      "detected": true,
+      "source": "L1",
+      "delta": 3,
+      "l3_traces": 0
+    },
+    "A04": {
+      "detected": true,
+      "source": "L1",
+      "delta": 5,
+      "l3_traces": 0
+    },
+    "A05": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A06": {
+      "detected": true,
+      "source": "L1",
+      "delta": 36,
+      "l3_traces": 0
+    },
+    "A07": {
+      "detected": true,
+      "source": "L1",
+      "delta": 3,
+      "l3_traces": 0
+    },
+    "A08": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A09": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A10": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A11": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A12": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A13": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A14": {
+      "detected": true,
+      "source": "L1",
+      "delta": -1,
+      "l3_traces": 0
+    },
+    "A15": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    },
+    "A16": {
+      "detected": true,
+      "source": "L1",
+      "delta": 16,
+      "l3_traces": 0
+    },
+    "A17": {
+      "detected": true,
+      "source": "L1",
+      "delta": 86,
+      "l3_traces": 0
+    },
+    "A18": {
+      "detected": true,
+      "source": "L1",
+      "delta": 36,
+      "l3_traces": 0
+    },
+    "A19": {
+      "detected": true,
+      "source": "L3",
+      "delta": 0,
+      "l3_traces": 1
+    },
+    "A20": {
+      "detected": true,
+      "source": "L1",
+      "delta": 1,
+      "l3_traces": 0
+    }
+  }
+}

@@ -1,0 +1,78 @@
+@prefix cave: <https://cave-onc.org/shacl/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+cave:Shape_RECIST_S1_sld_math a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S1_sld_math" ;
+    prov:wasDerivedFrom "RECIST_1_1_S1" ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "RS.SUMDIAM does not equal SUM of target-lesion TR.TRSTRESN at this visit" ;
+            sh:select "SELECT $this ?expected ?got WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'SUMDIAM' ; cave:RSSTRESN ?got ; cave:USUBJID ?u ; cave:VISITNUM ?v . { SELECT $this ?u ?v (SUM(?d) AS ?expected) WHERE { $this cave:USUBJID ?u ; cave:VISITNUM ?v . ?tr a cave:TR ; cave:USUBJID ?u ; cave:VISITNUM ?v ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d . } GROUP BY $this ?u ?v } FILTER(?expected != ?got) }" ] ;
+    sh:targetClass cave:RS .
+
+cave:Shape_RECIST_S2_target_cr a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S2_target_cr" ;
+    prov:wasDerivedFrom "RECIST_1_1_S2" ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "All target-lesion diameters are 0 and no lymph-node short-axis >= 10 mm but RSORRES is not CR" ;
+            sh:select "SELECT $this WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?resp ; cave:USUBJID ?u ; cave:VISITNUM ?v . FILTER(?resp != 'CR') { SELECT $this ?u ?v WHERE { $this cave:USUBJID ?u ; cave:VISITNUM ?v . ?tr a cave:TR ; cave:USUBJID ?u ; cave:VISITNUM ?v ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d . } GROUP BY $this ?u ?v HAVING (COUNT(?tr) > 0 && SUM(IF(?d > 0, 1, 0)) = 0) } FILTER NOT EXISTS { ?node a cave:TR ; cave:USUBJID ?u ; cave:VISITNUM ?v ; cave:TRTESTCD 'LNSADIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?nsa . FILTER(?nsa >= 10) } }" ] ;
+    sh:targetClass cave:RS .
+
+cave:Shape_RECIST_S3_target_pr a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S3_target_pr" ;
+    prov:wasDerivedFrom "RECIST_1_1_S3" ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "SLD decreased >= 30% from baseline but RSORRES is neither PR nor CR" ;
+            sh:select "SELECT $this WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?resp ; cave:USUBJID ?u ; cave:VISITNUM ?v . FILTER(?resp != 'PR' && ?resp != 'CR') { SELECT $this ?u ?v (SUM(?d) AS ?sld) WHERE { $this cave:USUBJID ?u ; cave:VISITNUM ?v . ?tr a cave:TR ; cave:USUBJID ?u ; cave:VISITNUM ?v ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d . } GROUP BY $this ?u ?v } { SELECT $this ?u (MIN(?bv) AS ?baseline_vn) WHERE { $this cave:USUBJID ?u . ?btr a cave:TR ; cave:USUBJID ?u ; cave:TRTARGETLN true ; cave:VISITNUM ?bv ; cave:EPOCH 'SCREENING' . } GROUP BY $this ?u } { SELECT $this ?u ?baseline_vn (SUM(?d) AS ?base_sld) WHERE { $this cave:USUBJID ?u . ?btr a cave:TR ; cave:USUBJID ?u ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d ; cave:VISITNUM ?baseline_vn . } GROUP BY $this ?u ?baseline_vn } FILTER(?v > ?baseline_vn && ?sld <= 0.70 * ?base_sld) }" ] ;
+    sh:targetClass cave:RS .
+
+cave:Shape_RECIST_S4_target_pd a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S4_target_pd" ;
+    prov:wasDerivedFrom "RECIST_1_1_S4" ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "SLD increased >= 20% over nadir with >= 5 mm absolute increase but RSORRES is not PD" ;
+            sh:select "SELECT $this WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?resp ; cave:USUBJID ?u ; cave:VISITNUM ?v . FILTER(?resp != 'PD') { SELECT $this ?u ?v (SUM(?d) AS ?sld) WHERE { $this cave:USUBJID ?u ; cave:VISITNUM ?v . ?tr a cave:TR ; cave:USUBJID ?u ; cave:VISITNUM ?v ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d . } GROUP BY $this ?u ?v } { SELECT $this ?u (MIN(?bv) AS ?baseline_vn) WHERE { $this cave:USUBJID ?u . ?btr a cave:TR ; cave:USUBJID ?u ; cave:TRTARGETLN true ; cave:VISITNUM ?bv ; cave:EPOCH 'SCREENING' . } GROUP BY $this ?u } { SELECT $this ?u ?v (MIN(?sld_val) AS ?nadir) WHERE { $this cave:VISITNUM ?v . { SELECT $this ?u ?vv (SUM(?d) AS ?sld_val) WHERE { $this cave:USUBJID ?u . ?tr a cave:TR ; cave:USUBJID ?u ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d ; cave:VISITNUM ?vv . } GROUP BY $this ?u ?vv } { SELECT $this ?u (MIN(?bv2) AS ?bl2) WHERE { $this cave:USUBJID ?u . ?btr2 a cave:TR ; cave:USUBJID ?u ; cave:TRTARGETLN true ; cave:VISITNUM ?bv2 ; cave:EPOCH 'SCREENING' . } GROUP BY $this ?u } FILTER(?vv >= ?bl2 && ?vv <= ?v) } GROUP BY $this ?u ?v } FILTER(?v > ?baseline_vn && ?sld >= 1.20 * ?nadir && (?sld - ?nadir) >= 5) }" ] ;
+    sh:targetClass cave:RS .
+
+cave:Shape_RECIST_S5_target_sd a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S5_target_sd" ;
+    prov:wasDerivedFrom "RECIST_1_1_S5" ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "Not CR/PR/PD by SLD criteria and no new lesion but RSORRES is not SD" ;
+            sh:select "SELECT $this WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?resp ; cave:USUBJID ?u ; cave:VISITNUM ?v . FILTER(?resp != 'SD') { SELECT $this ?u ?v (SUM(?d) AS ?sld) WHERE { $this cave:USUBJID ?u ; cave:VISITNUM ?v . ?tr a cave:TR ; cave:USUBJID ?u ; cave:VISITNUM ?v ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d . } GROUP BY $this ?u ?v } { SELECT $this ?u (MIN(?bv) AS ?baseline_vn) WHERE { $this cave:USUBJID ?u . ?btr a cave:TR ; cave:USUBJID ?u ; cave:TRTARGETLN true ; cave:VISITNUM ?bv ; cave:EPOCH 'SCREENING' . } GROUP BY $this ?u } { SELECT $this ?u ?baseline_vn (SUM(?d) AS ?base_sld) WHERE { $this cave:USUBJID ?u . ?btr a cave:TR ; cave:USUBJID ?u ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d ; cave:VISITNUM ?baseline_vn . } GROUP BY $this ?u ?baseline_vn } { SELECT $this ?u ?v (MIN(?sld_val) AS ?nadir) WHERE { $this cave:VISITNUM ?v . { SELECT $this ?u ?vv (SUM(?d) AS ?sld_val) WHERE { $this cave:USUBJID ?u . ?tr a cave:TR ; cave:USUBJID ?u ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?d ; cave:VISITNUM ?vv . } GROUP BY $this ?u ?vv } { SELECT $this ?u (MIN(?bv2) AS ?bl2) WHERE { $this cave:USUBJID ?u . ?btr2 a cave:TR ; cave:USUBJID ?u ; cave:TRTARGETLN true ; cave:VISITNUM ?bv2 ; cave:EPOCH 'SCREENING' . } GROUP BY $this ?u } FILTER(?vv >= ?bl2 && ?vv <= ?v) } GROUP BY $this ?u ?v } FILTER(?v > ?baseline_vn) FILTER(?sld > 0.70 * ?base_sld) FILTER(?sld < 1.20 * ?nadir || (?sld - ?nadir) < 5) FILTER NOT EXISTS { ?tu a cave:TU ; cave:USUBJID ?u ; cave:TUCAT 'TARGET LESION' ; cave:TULNKID ?lid ; cave:VISITNUM ?tu_v . FILTER(?tu_v = ?v && ?tu_v > ?baseline_vn) FILTER NOT EXISTS { ?tu_pre a cave:TU ; cave:USUBJID ?u ; cave:TULNKID ?lid ; cave:VISITNUM ?pre_v . FILTER(?pre_v <= ?baseline_vn) } } }" ] ;
+    sh:targetClass cave:RS .
+
+cave:Shape_RECIST_S6_new_lesion_pd a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S6_new_lesion_pd" ;
+    prov:wasDerivedFrom "RECIST_1_1_S6" ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "New target lesion appeared post-baseline but RSORRES is not PD" ;
+            sh:select "SELECT $this WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?resp ; cave:USUBJID ?u ; cave:VISITNUM ?v . FILTER(?resp != 'PD') { SELECT $this ?u (MIN(?bv) AS ?baseline_vn) WHERE { $this cave:USUBJID ?u . ?btr a cave:TR ; cave:USUBJID ?u ; cave:TRTARGETLN true ; cave:VISITNUM ?bv ; cave:EPOCH 'SCREENING' . } GROUP BY $this ?u } ?tu a cave:TU ; cave:USUBJID ?u ; cave:TUCAT 'TARGET LESION' ; cave:TULNKID ?lid ; cave:VISITNUM ?tu_v . FILTER(?tu_v > ?baseline_vn && ?tu_v = ?v) FILTER NOT EXISTS { ?tu_pre a cave:TU ; cave:USUBJID ?u ; cave:TULNKID ?lid ; cave:VISITNUM ?pre_v . FILTER(?pre_v <= ?baseline_vn) } }" ] ;
+    sh:targetClass cave:RS .
+
+cave:Shape_RECIST_S7_confirmation a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S7_confirmation" ;
+    prov:wasDerivedFrom "RECIST_1_1_S7" ;
+    sh:severity sh:Warning ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "CR or PR at visit V not confirmed by CR/PR at a subsequent visit >= 28 days later" ;
+            sh:select "SELECT $this WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?resp ; cave:RSDTC ?dt_v ; cave:USUBJID ?u ; cave:VISITNUM ?v . FILTER(?resp = 'CR' || ?resp = 'PR') FILTER NOT EXISTS { ?later a cave:RS ; cave:USUBJID ?u ; cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?later_resp ; cave:RSDTC ?dt_later . FILTER(?later_resp = 'CR' || ?later_resp = 'PR') FILTER(?dt_later > ?dt_v && ((?dt_later - ?dt_v) >= 'P28D'^^xsd:dayTimeDuration)) } }" ] ;
+    sh:targetClass cave:RS .
+
+cave:Shape_RECIST_S8_ne_propagation a sh:NodeShape ;
+    rdfs:label "RECIST 1.1 derivation" ;
+    rdfs:comment "RECIST 1.1 derivation shape; Shape_RECIST_S8_ne_propagation" ;
+    prov:wasDerivedFrom "RECIST_1_1_S8" ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "Target-lesion TR missing or NOT DONE but RSORRES is not NE" ;
+            sh:select "SELECT $this WHERE { $this cave:RSCAT 'TARGET RESPONSE' ; cave:RSTESTCD 'OVRESP' ; cave:RSORRES ?resp ; cave:USUBJID ?u ; cave:VISITNUM ?v . FILTER(?resp != 'NE') { SELECT $this ?u (MIN(?bv) AS ?baseline_vn) WHERE { $this cave:USUBJID ?u . ?btr a cave:TR ; cave:USUBJID ?u ; cave:TRTARGETLN true ; cave:VISITNUM ?bv ; cave:EPOCH 'SCREENING' . } GROUP BY $this ?u } FILTER(?v > ?baseline_vn) FILTER NOT EXISTS { ?tr a cave:TR ; cave:USUBJID ?u ; cave:VISITNUM ?v ; cave:TRTESTCD 'LDIAM' ; cave:TRTARGETLN true ; cave:TRSTRESN ?dval . FILTER(?dval >= 0) } }" ] ;
+    sh:targetClass cave:RS .
+

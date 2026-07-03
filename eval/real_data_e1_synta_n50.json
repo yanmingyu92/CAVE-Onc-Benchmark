@@ -1,0 +1,72 @@
+{
+  "tag": "synta",
+  "n_subjects_total": 325,
+  "n_subjects_run": 50,
+  "triples": 18283,
+  "conforms": false,
+  "report_is_graph": true,
+  "total_flags": 1310,
+  "bucket_totals": {
+    "recist_derivation": 20,
+    "archetype": 440,
+    "core_structural": 300,
+    "anon_property": 550
+  },
+  "flags_per_shape": {
+    "Shape_Archetype_A02": 380,
+    "n917baaa7fddb44699f7dcd26d97e4e26b344": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b345": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b276": 50,
+    "Shape_CORE-000224": 50,
+    "Shape_CORE-000223": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b338": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b339": 50,
+    "Shape_Archetype_A08": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b408": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b409": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b317": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b318": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b341": 50,
+    "n917baaa7fddb44699f7dcd26d97e4e26b342": 50,
+    "Shape_CORE-000191": 50,
+    "Shape_CORE-000883": 49,
+    "Shape_CORE-000189": 49,
+    "Shape_CORE-000452": 49,
+    "Shape_RECIST_S1_sld_math": 16,
+    "Shape_Archetype_A01": 10,
+    "Shape_RECIST_S8_ne_propagation": 2,
+    "Shape_RECIST_S3_target_pr": 1,
+    "Shape_CORE-000645": 1,
+    "Shape_CORE-001043": 1,
+    "Shape_RECIST_S5_target_sd": 1,
+    "Shape_CORE-000648": 1
+  },
+  "recist_signal_shapes": {
+    "Shape_RECIST_S1_sld_math": 16,
+    "Shape_RECIST_S8_ne_propagation": 2,
+    "Shape_RECIST_S3_target_pr": 1,
+    "Shape_RECIST_S5_target_sd": 1
+  },
+  "archetype_shapes": {
+    "Shape_Archetype_A02": 380,
+    "Shape_Archetype_A08": 50,
+    "Shape_Archetype_A01": 10
+  },
+  "flagged_subjects": 50,
+  "top_flagged_subjects": {
+    "SYNTA-4783-08-113": 39,
+    "SYNTA-4783-08-140": 38,
+    "SYNTA-4783-08-124": 35,
+    "SYNTA-4783-08-122": 35,
+    "SYNTA-4783-08-118": 35,
+    "SYNTA-4783-08-132": 34,
+    "SYNTA-4783-08-141": 33,
+    "SYNTA-4783-08-116": 32,
+    "SYNTA-4783-08-115": 31,
+    "SYNTA-4783-08-126": 31
+  },
+  "timing_sec": {
+    "load": 1.9,
+    "validate": 635.4
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "clean_baseline_l1_pairs": 1885,
+  "clean_baseline_l3_noise_subjects": 0,
+  "detection_criterion": "new (USUBJID, shape) L1 violation on injected subject, OR new L3 trace on injected subject vs clean baseline",
+  "n_heldout": 5,
+  "n_detected_by_existing_shapes": 3,
+  "generalization_rate": 0.6,
+  "n_detected_naive_criterion": 3,
+  "results": [
+    {
+      "archetype": "H01",
+      "injected": true,
+      "subject": "01-701-1015",
+      "description": "A01 + A02 co-injected in one subject (interaction)",
+      "design_expectation": "detect (co-occurrence; A01/A02 shapes exist)",
+      "new_l1_violations_on_subject": [
+        "https://cave-onc.org/shacl/Shape_Archetype_A02"
+      ],
+      "l1_detected_specific": true,
+      "l3_detected_specific": false,
+      "detected_by_existing": true,
+      "source": "L1",
+      "naive_global_delta": 1,
+      "naive_would_say_detected": true
+    },
+    {
+      "archetype": "H02",
+      "injected": true,
+      "subject": "01-701-1015",
+      "description": "RFICDTC 14d after first EXSTDTC (consent after exposure)",
+      "design_expectation": "miss (no consent-ordering shape)",
+      "new_l1_violations_on_subject": [],
+      "l1_detected_specific": false,
+      "l3_detected_specific": false,
+      "detected_by_existing": false,
+      "source": "none",
+      "naive_global_delta": 0,
+      "naive_would_say_detected": false
+    },
+    {
+      "archetype": "H03",
+      "injected": true,
+      "subject": "01-701-1015",
+      "description": "RS=CR but target LDIAM=25mm measurable at same visit",
+      "design_expectation": "miss/partial (novel CR+measurable pattern)",
+      "new_l1_violations_on_subject": [],
+      "l1_detected_specific": false,
+      "l3_detected_specific": true,
+      "detected_by_existing": true,
+      "source": "L3",
+      "naive_global_delta": 0,
+      "naive_would_say_detected": true
+    },
+    {
+      "archetype": "H04",
+      "injected": true,
+      "subject": "01-701-1015",
+      "description": "Non-target UNEQUIVOCAL PROGRESSION but RS=PR (A06 value-perturbed)",
+      "design_expectation": "detect (A18 value-robust)",
+      "new_l1_violations_on_subject": [
+        "https://cave-onc.org/shacl/Shape_Archetype_A18"
+      ],
+      "l1_detected_specific": true,
+      "l3_detected_specific": false,
+      "detected_by_existing": true,
+      "source": "L1",
+      "naive_global_delta": 1,
+      "naive_would_say_detected": true
+    },
+    {
+      "archetype": "H05",
+      "injected": true,
+      "subject": "01-701-1015",
+      "description": "EX present but ARMCD/ACTARMCD blanked (exposed, not assigned)",
+      "design_expectation": "miss (no exposed-but-unassigned shape)",
+      "new_l1_violations_on_subject": [],
+      "l1_detected_specific": false,
+      "l3_detected_specific": false,
+      "detected_by_existing": false,
+      "source": "none",
+      "naive_global_delta": 0,
+      "naive_would_say_detected": false
+    }
+  ]
+}

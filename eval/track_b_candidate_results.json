@@ -1,0 +1,194 @@
+{
+  "method": "candidate_subject_specific_no_global_delta",
+  "backend": "oxigraph",
+  "candidates_per_archetype": 12,
+  "archetypes": [
+    {
+      "archetype_id": "A01",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 9,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1115"
+    },
+    {
+      "archetype_id": "A02",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A03",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A04",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A05",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A06",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 5,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1034"
+    },
+    {
+      "archetype_id": "A07",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 11,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1118"
+    },
+    {
+      "archetype_id": "A08",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A09",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A10",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A11",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A12",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A13",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A14",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A15",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A16",
+      "status": "detected",
+      "detection_source": "structural",
+      "usubjid": "01-701-1015",
+      "total_flag_delta": 16
+    },
+    {
+      "archetype_id": "A17",
+      "status": "detected",
+      "detection_source": "L1",
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A18",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 5,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1034"
+    },
+    {
+      "archetype_id": "A19",
+      "status": "detected",
+      "detection_source": "L3",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    },
+    {
+      "archetype_id": "A20",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 1,
+      "candidates_detected": 1,
+      "usubjid": "01-701-1015"
+    }
+  ],
+  "summary": {
+    "archetypes_tested": 20,
+    "detected": 20,
+    "detected_ids": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19",
+      "A20"
+    ],
+    "missed_ids": [],
+    "l1_detections": 18,
+    "l3_detections": 1,
+    "structural_detections": 1
+  }
+}

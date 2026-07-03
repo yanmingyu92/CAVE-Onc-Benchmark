@@ -1,0 +1,296 @@
+{
+  "engine": "Pinnacle 21 Community \u2014 branded FDA production engine (FDA 2405.2)",
+  "standard": "sdtmig 3.4",
+  "corpus": "Track B lean benchmark (same bench/core_lean corpora as the CORE baseline)",
+  "clean_issues": 4828,
+  "archetypes_total": 20,
+  "detection_criterion": "P21 detects an archetype iff a NEW P21 issue whose rule semantics ARE the injected contradiction ('direct') appears vs clean. 'indirect' = generic derived-variable rule any edit trips; 'collateral'/silence = not detected.",
+  "HEADLINE": {
+    "p21_detects_DIRECT": "6/20",
+    "p21_detects_direct_plus_indirect": "7/20",
+    "p21_flags_subject_any_reason": "11/20",
+    "noncore_crossdomain_detected": "0/10",
+    "core_derived_structural_detected_direct": "6/10",
+    "core_derived_structural_detected_incl_indirect": "7/10"
+  },
+  "note": "Real branded Pinnacle 21 FDA engine on the Track B corpus. Compare against eval/core_p21_benchmark.json (open CORE engine). Both are domain-scoped structural validators; the non-CORE cross-domain RECIST class is the expressiveness gap CAVE targets.",
+  "per_archetype": [
+    {
+      "archetype": "A01",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "RSORRES=PD vs >=30% SLD decrease; P21 silent (0 new issues)"
+    },
+    {
+      "archetype": "A02",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 1,
+      "p21_flags_any": true,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [
+        "SD0052"
+      ],
+      "rationale": "P21 fires only SD0052 (collateral VISITNUM-within-VISIT label inconsistency at the new-lesion visit), not the new-lesion-vs-SD RECIST contradiction"
+    },
+    {
+      "archetype": "A03",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 2,
+      "p21_flags_any": true,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [
+        "SD0013",
+        "SD1090"
+      ],
+      "rationale": "P21 fires only collateral EX date errors (SD0013 EXSTDTC>EXENDTC, SD1090 EXSTDY miscalc), not the exposure-after-attributed-AE temporal contradiction"
+    },
+    {
+      "archetype": "A04",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 147,
+      "p21_flags_any": true,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [
+        "SD0052"
+      ],
+      "rationale": "P21 fires only SD0052 (collateral intra-domain VISITNUM/VISIT label inconsistency), not the cross-domain visit-window propagation"
+    },
+    {
+      "archetype": "A05",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "SUPPDM SEX vs DM SEX conflict; P21 silent (0 new issues)"
+    },
+    {
+      "archetype": "A06",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "non-target PD vs RSORRES=SD; P21 silent (0 new issues)"
+    },
+    {
+      "archetype": "A07",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "PR without 28d confirmation; P21 silent (0 new issues)"
+    },
+    {
+      "archetype": "A08",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000210",
+      "p21_new_issue_count": 88,
+      "p21_flags_any": true,
+      "detection_confidence": "direct",
+      "p21_detects_contradiction": true,
+      "matched_p21_rule": "SD0066",
+      "new_p21_rule_ids": [
+        "SD0066",
+        "SD0071",
+        "SD1033",
+        "SD2236"
+      ],
+      "rationale": "SD0066 'Invalid ARMCD' (ARMCD not in TA codelist) IS the injected contradiction"
+    },
+    {
+      "archetype": "A09",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000296",
+      "p21_new_issue_count": 2,
+      "p21_flags_any": true,
+      "detection_confidence": "direct",
+      "p21_detects_contradiction": true,
+      "matched_p21_rule": "SD1374",
+      "new_p21_rule_ids": [
+        "SD1374",
+        "SD2288"
+      ],
+      "rationale": "SD1374 'No Disposition record found for subject' IS the contradiction"
+    },
+    {
+      "archetype": "A10",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000239",
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "RFXSTDTC != earliest EXSTDTC; P21 FDA has no reference-date aggregation rule -> silent (CORE detects this)"
+    },
+    {
+      "archetype": "A11",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000238",
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "RFXENDTC != latest EX date; P21 silent, no such rule (CORE detects this)"
+    },
+    {
+      "archetype": "A12",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000108",
+      "p21_new_issue_count": 1,
+      "p21_flags_any": true,
+      "detection_confidence": "direct",
+      "p21_detects_contradiction": true,
+      "matched_p21_rule": "SD2005",
+      "new_p21_rule_ids": [
+        "SD2005"
+      ],
+      "rationale": "SD2005 'Missing DTHDTC when DTHFL populated' IS the death-flag contradiction"
+    },
+    {
+      "archetype": "A13",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000846",
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "RACE=MULTIPLE w/o SUPPDM; P21 silent, no such rule (CORE detects this)"
+    },
+    {
+      "archetype": "A14",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000366",
+      "p21_new_issue_count": 1,
+      "p21_flags_any": true,
+      "detection_confidence": "direct",
+      "p21_detects_contradiction": true,
+      "matched_p21_rule": "SD0070",
+      "new_p21_rule_ids": [
+        "SD0070"
+      ],
+      "rationale": "SD0070 'No Exposure record found for subject' IS the contradiction (CORE missed this)"
+    },
+    {
+      "archetype": "A15",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-001044",
+      "p21_new_issue_count": 13,
+      "p21_flags_any": true,
+      "detection_confidence": "indirect",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": "SD1086",
+      "new_p21_rule_ids": [
+        "SD1086",
+        "SD1090",
+        "SD1094"
+      ],
+      "rationale": "RFSTDTC shift surfaced only via SD1086/SD1090/SD1094 study-day (DMDY/AESTDY/DSSTDY) miscalc -- generic derived-variable rules any date edit trips; specificity to the contradiction not shown"
+    },
+    {
+      "archetype": "A16",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000351",
+      "p21_new_issue_count": 5,
+      "p21_flags_any": true,
+      "detection_confidence": "direct",
+      "p21_detects_contradiction": true,
+      "matched_p21_rule": "SD1349",
+      "new_p21_rule_ids": [
+        "SD0066",
+        "SD0071",
+        "SD1349",
+        "SD2002",
+        "SD2003"
+      ],
+      "rationale": "SD1349 'Inconsistent STUDYID' for the duplicated USUBJID IS the duplicate-across-studies contradiction"
+    },
+    {
+      "archetype": "A17",
+      "category": "core_derived_structural",
+      "design_core_seed": "CORE-000318",
+      "p21_new_issue_count": 3,
+      "p21_flags_any": true,
+      "detection_confidence": "direct",
+      "p21_detects_contradiction": true,
+      "matched_p21_rule": "SD0071",
+      "new_p21_rule_ids": [
+        "SD0071",
+        "SD1034",
+        "SD2237"
+      ],
+      "rationale": "SD0071 'Invalid ARM/ARMCD' + SD1034 -- ARMCD-ARM not 1:1 IS the contradiction"
+    },
+    {
+      "archetype": "A18",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "non-target PD vs RS=SD; P21 silent (0 new issues)"
+    },
+    {
+      "archetype": "A19",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 0,
+      "p21_flags_any": false,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [],
+      "rationale": "RSORRES=CR vs target PR (Table 7); P21 silent (0 new issues)"
+    },
+    {
+      "archetype": "A20",
+      "category": "noncore_crossdomain",
+      "design_core_seed": null,
+      "p21_new_issue_count": 3,
+      "p21_flags_any": true,
+      "detection_confidence": "none",
+      "p21_detects_contradiction": false,
+      "matched_p21_rule": null,
+      "new_p21_rule_ids": [
+        "SD0005",
+        "SD0051",
+        "SD0052"
+      ],
+      "rationale": "P21 fires only collateral SD0005 (duplicate RSSEQ) + SD0051/SD0052 (VISIT label inconsistency), not the iRECIST iCPD temporal contradiction"
+    }
+  ]
+}

@@ -1,0 +1,777 @@
+@prefix cave: <https://cave-onc.org/shacl/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+cave:Shape_CORE-000006 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000006; demorgan; operators: non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000006" ;
+    sh:or ( [ sh:property [ sh:hasValue "Y"^^xsd:string ;
+                        sh:path cave:DTHFL ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:DTHFL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000007 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000007; demorgan; operators: non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000007" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:DTHDTC ] ] [ sh:property [ sh:hasValue "Y"^^xsd:string ;
+                        sh:path cave:DTHFL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000008 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000008; demorgan; operators: equal_to,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000008" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "DEAD"^^xsd:string ] ;
+                        sh:path cave:SSSTRESC ] ] [ sh:property [ sh:hasValue "Y"^^xsd:string ;
+                        sh:path cave:DTHFL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000010 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000010; operators: matches_regex" ;
+    prov:wasDerivedFrom "CORE-000010" ;
+    sh:property [ sh:not [ sh:pattern "^(.){21,}$" ] ;
+            sh:path cave:ARMCD ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000045 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000045; demorgan; operators: empty" ;
+    prov:wasDerivedFrom "CORE-000045" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ARMCD ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ARMNRS ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000046 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000046; demorgan; operators: empty" ;
+    prov:wasDerivedFrom "CORE-000046" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ARM ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ARMNRS ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000068 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000068; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000068" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:AGETXT ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000069 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000069; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000069" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:SPECIES ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000070 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000070; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000070" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:STRAIN ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000071 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000071; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000071" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:SBSTRAIN ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000073 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000073; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000073" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:RPATHCD ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000088 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000088; operators: matches_regex" ;
+    prov:wasDerivedFrom "CORE-000088" ;
+    sh:property [ sh:not [ sh:pattern "^(.){9,}$" ] ;
+            sh:path cave:SETCD ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000115 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000115; operators: is_contained_by_case_insensitive" ;
+    prov:wasDerivedFrom "CORE-000115" ;
+    sh:property [ sh:not [ sh:flags "i" ;
+                    sh:pattern "^(Screen\\ Failure|Not\\ Assigned|Not\\ Treated|Unplanned\\ Treatment)$" ] ;
+            sh:path cave:ARM ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000119 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000119; demorgan; operators: empty,non_empty" ;
+    prov:wasDerivedFrom "CORE-000119" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ARMCD ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ARM ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000120 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000120; demorgan; operators: empty,non_empty" ;
+    prov:wasDerivedFrom "CORE-000120" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ACTARMCD ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ACTARM ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000121 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000121; demorgan; operators: non_empty" ;
+    prov:wasDerivedFrom "CORE-000121" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ARMCD ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ACTARMCD ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ARMNRS ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000122 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000122; demorgan; operators: empty,non_empty,not_exists" ;
+    prov:wasDerivedFrom "CORE-000122" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGEU ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGE ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGETXT ] ] ),
+        ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGEU ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGE ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGETXT ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000174 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000174; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000174" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:SPECIES ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000175 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000175; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000175" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:STRAIN ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000176 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000176; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000176" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:SBSTRAIN ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000185 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000185; operators: longer_than" ;
+    prov:wasDerivedFrom "CORE-000185" ;
+    sh:property [ sh:maxLength 20 ;
+            sh:path cave:ACTARMCD ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000189 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000189; demorgan; operators: empty,non_empty" ;
+    prov:wasDerivedFrom "CORE-000189" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGE ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGEU ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000190 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000190; demorgan; operators: empty,non_empty" ;
+    prov:wasDerivedFrom "CORE-000190" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGEU ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGE ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000191 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000191; demorgan; operators: empty,non_empty" ;
+    prov:wasDerivedFrom "CORE-000191" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ARM ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:RFENDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000192 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000192; demorgan; operators: non_empty" ;
+    prov:wasDerivedFrom "CORE-000192" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ARMNRS ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:RFENDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000223 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000223; demorgan; operators: empty" ;
+    prov:wasDerivedFrom "CORE-000223" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ACTARMCD ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ARMNRS ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000224 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000224; demorgan; operators: empty" ;
+    prov:wasDerivedFrom "CORE-000224" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ACTARM ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:ARMNRS ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000252 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000252; demorgan; operators: equal_to,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000252" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "DEATH"^^xsd:string ] ;
+                        sh:path cave:DSDECOD ] ] [ sh:property [ sh:hasValue "Y"^^xsd:string ;
+                        sh:path cave:DTHFL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000253 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000253; demorgan; operators: equal_to,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000253" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "Y"^^xsd:string ] ;
+                        sh:path cave:AESDTH ] ] [ sh:property [ sh:hasValue "Y"^^xsd:string ;
+                        sh:path cave:DTHFL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000254 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000254; demorgan; operators: equal_to,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000254" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "FATAL"^^xsd:string ] ;
+                        sh:path cave:AEOUT ] ] [ sh:property [ sh:hasValue "Y"^^xsd:string ;
+                        sh:path cave:DTHFL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000310 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000310; operators: less_than" ;
+    prov:wasDerivedFrom "CORE-000310" ;
+    sh:property [ sh:minInclusive 0 ;
+            sh:path cave:AGE ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000325 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000325; demorgan; operators: equal_to,longer_than" ;
+    prov:wasDerivedFrom "CORE-000325" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "ARMCD"^^xsd:string ] ;
+                        sh:path cave:TXPARMCD ] ] [ sh:property [ sh:maxLength 20 ;
+                        sh:path cave:TXVAL ] ] ) ;
+    sh:property [ sh:maxLength 20 ;
+            sh:path cave:ARMCD ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000330 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000330; demorgan; operators: is_contained_by,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000330" ;
+    sh:or ( [ sh:property [ sh:not [ sh:in ( "Screen Failure"^^xsd:string "Not Assigned"^^xsd:string "SCREEN FAILURE"^^xsd:string "NOT ASSIGNED"^^xsd:string ) ] ;
+                        sh:path cave:ARM ] ] [ sh:property [ sh:hasValue "ACTARM"^^xsd:string ;
+                        sh:path cave:ARM ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000369 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000369; demorgan; operators: is_contained_by,non_empty" ;
+    prov:wasDerivedFrom "CORE-000369" ;
+    sh:or ( [ sh:property [ sh:not [ sh:in ( "Screen Failure"^^xsd:string "Not Assigned"^^xsd:string "Not Treated"^^xsd:string "SCREEN FAILURE"^^xsd:string "NOT ASSIGNED"^^xsd:string "NOT TREATED"^^xsd:string ) ] ;
+                        sh:path cave:ACTARM ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:RFENDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000377 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000377; demorgan; operators: is_contained_by,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000377" ;
+    sh:or ( [ sh:property [ sh:not [ sh:in ( "SCRNFAIL"^^xsd:string "NOTASSGN"^^xsd:string ) ] ;
+                        sh:path cave:ARMCD ] ] [ sh:property [ sh:hasValue "ACTARMCD"^^xsd:string ;
+                        sh:path cave:ARMCD ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000378 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000378; demorgan; operators: empty,is_not_contained_by" ;
+    prov:wasDerivedFrom "CORE-000378" ;
+    sh:or ( [ sh:property [ sh:in ( "Screen Failure"^^xsd:string "Not Assigned"^^xsd:string "Not Treated"^^xsd:string "SCREEN FAILURE"^^xsd:string "NOT ASSIGNED"^^xsd:string "NOT TREATED"^^xsd:string ) ;
+                        sh:path cave:ACTARM ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:RFENDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000379 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000379; demorgan; operators: is_contained_by,non_empty" ;
+    prov:wasDerivedFrom "CORE-000379" ;
+    sh:or ( [ sh:property [ sh:not [ sh:in ( "Screen Failure"^^xsd:string "Not Assigned"^^xsd:string "Not Treated"^^xsd:string "SCREEN FAILURE"^^xsd:string "NOT ASSIGNED"^^xsd:string "NOT TREATED"^^xsd:string ) ] ;
+                        sh:path cave:ACTARM ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:RFSTDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000380 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000380; demorgan; operators: empty,is_not_contained_by" ;
+    prov:wasDerivedFrom "CORE-000380" ;
+    sh:or ( [ sh:property [ sh:in ( "Screen Failure"^^xsd:string "Not Assigned"^^xsd:string "Not Treated"^^xsd:string "SCREEN FAILURE"^^xsd:string "NOT ASSIGNED"^^xsd:string "NOT TREATED"^^xsd:string ) ;
+                        sh:path cave:ACTARM ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:RFSTDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000452 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000452; demorgan; operators: empty,non_empty,not_exists" ;
+    prov:wasDerivedFrom "CORE-000452" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGEU ],
+                    [ sh:minCount 1 ;
+                        sh:path cave:AGEU ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGETXT ],
+                    [ sh:maxCount 0 ;
+                        sh:path cave:AGE ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000453 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000453; demorgan; operators: empty,non_empty,not_exists" ;
+    prov:wasDerivedFrom "CORE-000453" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGEU ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGETXT ],
+                    [ sh:minCount 1 ;
+                        sh:path cave:AGETXT ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGE ],
+                    [ sh:minCount 1 ;
+                        sh:path cave:AGE ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000493 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000493; demorgan; operators: non_empty,not_matches_regex" ;
+    prov:wasDerivedFrom "CORE-000493" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGETXT ] ] [ sh:property [ sh:path cave:AGETXT ;
+                        sh:pattern "^[0-9]+-[0-9]+$" ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000498 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000498; demorgan; operators: non_empty" ;
+    prov:wasDerivedFrom "CORE-000498" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGETXT ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:BRTHDTC ],
+                    [ sh:maxCount 0 ;
+                        sh:path cave:AGE ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000530 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000530; demorgan; operators: is_contained_by,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000530" ;
+    sh:or ( [ sh:property [ sh:not [ sh:in ( "Screen Failure"^^xsd:string "Not Assigned"^^xsd:string "SCREEN FAILURE"^^xsd:string "NOT ASSIGNED"^^xsd:string ) ] ;
+                        sh:path cave:ACTARM ] ] [ sh:property [ sh:hasValue "ARM"^^xsd:string ;
+                        sh:path cave:ACTARM ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000543 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000543; demorgan; operators: is_contained_by,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000543" ;
+    sh:or ( [ sh:property [ sh:not [ sh:in ( "SCRNFAIL"^^xsd:string "NOTASSGN"^^xsd:string ) ] ;
+                        sh:path cave:ACTARMCD ] ] [ sh:property [ sh:hasValue "ARMCD"^^xsd:string ;
+                        sh:path cave:ACTARMCD ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000631 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000631; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000631" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:RFICDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000632 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000632; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000632" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:RFPENDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000633 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000633; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000633" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:RACE ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000634 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000634; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000634" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:INVNAM ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000635 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000635; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000635" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:INVID ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000636 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000636; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000636" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:ETHNIC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000637 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000637; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000637" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:DTHFL ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000638 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000638; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000638" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:DTHDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000639 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000639; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000639" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:COUNTRY ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000640 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000640; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000640" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:ACTARM ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000641 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000641; operators: exists" ;
+    prov:wasDerivedFrom "CORE-000641" ;
+    sh:property [ sh:maxCount 0 ;
+            sh:path cave:ACTARMCD ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000645 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000645; demorgan; operators: not_exists" ;
+    prov:wasDerivedFrom "CORE-000645" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGE ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGETXT ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000648 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000648; demorgan; operators: empty" ;
+    prov:wasDerivedFrom "CORE-000648" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGE ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGETXT ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000655 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000655; demorgan; operators: non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000655" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ARMCD ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ACTARMCD ] ] [ sh:property [ sh:hasValue "ARMCD"^^xsd:string ;
+                        sh:path cave:ACTARMCD ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000656 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000656; demorgan; operators: non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000656" ;
+    sh:or ( [ sh:or ( [ sh:property [ sh:maxCount 0 ;
+                                    sh:path cave:ARM ] ] [ sh:property [ sh:maxCount 0 ;
+                                    sh:path cave:ACTARM ] ] [ sh:property [ sh:hasValue "ARM"^^xsd:string ;
+                                    sh:path cave:ACTARM ] ] ) ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000658 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000658; operators: date_greater_than,non_empty" ;
+    prov:wasDerivedFrom "CORE-000658" ;
+    sh:property [ sh:minCount 1 ;
+            sh:path cave:RFICDTC ],
+        [ sh:minCount 1 ;
+            sh:path cave:RFXSTDTC ],
+        [ sh:lessThan cave:RFXSTDTC ;
+            sh:path cave:RFICDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000705 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000705; demorgan; operators: empty,equal_to" ;
+    prov:wasDerivedFrom "CORE-000705" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "Y"^^xsd:string ] ;
+                        sh:path cave:DTHFL ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:DTHDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000709 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000709; demorgan; operators: equal_to,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000709" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "DEATH"^^xsd:string ] ;
+                        sh:path cave:CETERM ],
+                    [ sh:not [ sh:hasValue "DEATH"^^xsd:string ] ;
+                        sh:path cave:CEDECOD ] ] [ sh:or ( [ sh:property [ sh:hasValue "Y"^^xsd:string ;
+                                    sh:path cave:DTHFL ] ] ) ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000711 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000711; operators: date_greater_than,non_empty" ;
+    prov:wasDerivedFrom "CORE-000711" ;
+    sh:property [ sh:minCount 1 ;
+            sh:path cave:RFSTDTC ],
+        [ sh:minCount 1 ;
+            sh:path cave:RFENDTC ],
+        [ sh:lessThan cave:RFENDTC ;
+            sh:path cave:RFSTDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000713 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000713; operators: date_greater_than,non_empty" ;
+    prov:wasDerivedFrom "CORE-000713" ;
+    sh:property [ sh:minCount 1 ;
+            sh:path cave:RFICDTC ],
+        [ sh:minCount 1 ;
+            sh:path cave:RFSTDTC ],
+        [ sh:lessThan cave:RFSTDTC ;
+            sh:path cave:RFICDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000714 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000714; operators: date_greater_than,non_empty" ;
+    prov:wasDerivedFrom "CORE-000714" ;
+    sh:property [ sh:minCount 1 ;
+            sh:path cave:RFXSTDTC ],
+        [ sh:minCount 1 ;
+            sh:path cave:RFXENDTC ],
+        [ sh:lessThan cave:RFXENDTC ;
+            sh:path cave:RFXSTDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000721 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000721; operators: is_contained_by_case_insensitive" ;
+    prov:wasDerivedFrom "CORE-000721" ;
+    sh:property [ sh:not [ sh:flags "i" ;
+                    sh:pattern "^(Screen\\ Failure|Not\\ Assigned|Not\\ Exposed\\ to\\ Product|Unplanned\\ Product\\ Exposure)$" ] ;
+            sh:path cave:ARM ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000726 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000726; demorgan; operators: equal_to,is_not_contained_by,non_empty" ;
+    prov:wasDerivedFrom "CORE-000726" ;
+    sh:or ( [ sh:property [ sh:not [ sh:hasValue "CETHNIC"^^xsd:string ] ;
+                        sh:path cave:QNAM ] ] [ sh:property [ sh:in ( "HISPANIC OR LATINO"^^xsd:string "NOT HISPANIC OR LATINO"^^xsd:string ) ;
+                        sh:path cave:QVAL ] ] [ sh:property [ sh:in ( "HISPANIC OR LATINO"^^xsd:string "NOT HISPANIC OR LATINO"^^xsd:string ) ;
+                        sh:path cave:ETHNIC ] ] ),
+        ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ETHNIC ] ] [ sh:property [ sh:in ( "HISPANIC OR LATINO"^^xsd:string "NOT HISPANIC OR LATINO"^^xsd:string ) ;
+                        sh:path cave:ETHNIC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000746 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000746; demorgan; operators: equal_to,non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000746" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ETHNIC ] ] [ sh:property [ sh:hasValue "HISPANIC OR LATINO"^^xsd:string ;
+                        sh:path cave:ETHNIC ] ] [ sh:property [ sh:not [ sh:hasValue "CETHNIC"^^xsd:string ] ;
+                        sh:path cave:QNAM ] ] [ sh:property [ sh:not [ sh:hasValue "SPANISH ORIGIN"^^xsd:string ] ;
+                        sh:path cave:QVAL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000747 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000747; demorgan; operators: equal_to,non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000747" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:RACE ] ] [ sh:property [ sh:hasValue "BLACK OR AFRICAN AMERICAN"^^xsd:string ;
+                        sh:path cave:RACE ] ] [ sh:property [ sh:not [ sh:hasValue "CRACE"^^xsd:string ] ;
+                        sh:path cave:QNAM ] ] [ sh:property [ sh:not [ sh:hasValue "HATIAN or NEGRO"^^xsd:string ] ;
+                        sh:path cave:QVAL ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000758 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000758; demorgan; operators: non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000758" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:ARMNRS ] ] [ sh:property [ sh:hasValue "UNPLANNED TREATMENT"^^xsd:string ;
+                        sh:path cave:ARMNRS ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:RFSTDTC ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000760 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000760; operators: date_greater_than,non_empty" ;
+    prov:wasDerivedFrom "CORE-000760" ;
+    sh:property [ sh:minCount 1 ;
+            sh:path cave:RFCSTDTC ],
+        [ sh:minCount 1 ;
+            sh:path cave:RFCENDTC ],
+        [ sh:lessThan cave:RFCENDTC ;
+            sh:path cave:RFCSTDTC ] ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000883 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-000883; demorgan; operators: empty,non_empty" ;
+    prov:wasDerivedFrom "CORE-000883" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGEU ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:AGETXT ],
+                    [ sh:maxCount 0 ;
+                        sh:path cave:AGE ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-000903 a sh:NodeShape ;
+    rdfs:label "Variable Metadata Check against Library Metadata" ;
+    rdfs:comment "ported from CORE-000903; demorgan; operators: exists,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-000903" ;
+    sh:or ( [ sh:property [ sh:maxCount 0 ;
+                        sh:path cave:variable_name ] ] [ sh:property [ sh:hasValue "library_variable_name"^^xsd:string ;
+                        sh:path cave:variable_name ] ] ) ;
+    sh:targetClass cave:DM .
+
+
+cave:Shape_CORE-001043 a sh:NodeShape ;
+    rdfs:label "Record Data" ;
+    rdfs:comment "ported from CORE-001043; demorgan; operators: empty,non_empty,not_equal_to" ;
+    prov:wasDerivedFrom "CORE-001043" ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path cave:AGE ] ] [ sh:or ( [ sh:property [ sh:maxCount 0 ;
+                                    sh:path cave:ARMNRS ] ] [ sh:property [ sh:hasValue "SCREEN FAILURE"^^xsd:string ;
+                                    sh:path cave:ARMNRS ] ] [ sh:property [ sh:hasValue "Screen Failure"^^xsd:string ;
+                                    sh:path cave:ARMNRS ] ] ),
+                    ( [ sh:property [ sh:maxCount 0 ;
+                                    sh:path cave:ARMCD ] ] [ sh:property [ sh:hasValue "SCRNFAIL"^^xsd:string ;
+                                    sh:path cave:ARMCD ] ] ) ] ) ;
+    sh:targetClass cave:DM .

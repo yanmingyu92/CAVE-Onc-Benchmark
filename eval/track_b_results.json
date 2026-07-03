@@ -1,0 +1,240 @@
+{
+  "archetypes": [
+    {
+      "archetype_id": "A01",
+      "injected": true,
+      "description": "RSORRES\u2192PD at V3 despite \u226530% SLD decrease",
+      "l1_flag_count": 5960,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 3,
+      "error": ""
+    },
+    {
+      "archetype_id": "A02",
+      "injected": true,
+      "description": "New lesion T09 at V2, RSORRES=SD",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A03",
+      "injected": true,
+      "description": "EXSTDTC\u219214d after AESTDTC=2014-01-03",
+      "l1_flag_count": 5960,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 3,
+      "error": ""
+    },
+    {
+      "archetype_id": "A04",
+      "injected": true,
+      "description": "TR/RS VISITNUM shifted at V2, EX unchanged",
+      "l1_flag_count": 5962,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 5,
+      "error": ""
+    },
+    {
+      "archetype_id": "A05",
+      "injected": true,
+      "description": "SUPPDM SEX=M conflicts with DM SEX=F",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A06",
+      "injected": true,
+      "description": "Non-target PD at V2 but RSORRES=SD",
+      "l1_flag_count": 5993,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 36,
+      "error": ""
+    },
+    {
+      "archetype_id": "A07",
+      "injected": true,
+      "description": "PR at V2, no confirmation within 28d",
+      "l1_flag_count": 5960,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 3,
+      "error": ""
+    },
+    {
+      "archetype_id": "A08",
+      "injected": true,
+      "description": "ARMCD\u2192TRTARMX (not in TA)",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A09",
+      "injected": true,
+      "description": "DS records removed for subject with ACTARMCD",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A10",
+      "injected": true,
+      "description": "RFXSTDTC shifted -7d from min EXSTDTC",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A11",
+      "injected": true,
+      "description": "RFXENDTC shifted +7d from max EXENDTC",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A12",
+      "injected": true,
+      "description": "DTHFL=Y without DD records",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A13",
+      "injected": true,
+      "description": "RACE=MULTIPLE w/o SUPPDM records",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A14",
+      "injected": true,
+      "description": "EX records removed for subject with ACTARMCD",
+      "l1_flag_count": 5956,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": -1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A15",
+      "injected": true,
+      "description": "RFSTDTC shifted -5d from first EXSTDTC",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    },
+    {
+      "archetype_id": "A16",
+      "injected": true,
+      "description": "DM row dup'd with STUDYID=DUPLICATE_STUDY",
+      "l1_flag_count": 5973,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 16,
+      "error": ""
+    },
+    {
+      "archetype_id": "A17",
+      "injected": true,
+      "description": "ARM changed for ARMCD=Pbo \u2192 not 1:1",
+      "l1_flag_count": 6043,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 86,
+      "error": ""
+    },
+    {
+      "archetype_id": "A18",
+      "injected": true,
+      "description": "Non-target PD at V2 but RS=SD",
+      "l1_flag_count": 5993,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 36,
+      "error": ""
+    },
+    {
+      "archetype_id": "A19",
+      "injected": true,
+      "description": "RSORRES=CR at V2 while target shows PR",
+      "l1_flag_count": 5957,
+      "l3_flag_count": 1,
+      "detected": true,
+      "detection_source": "L3",
+      "flag_delta_vs_clean": 0,
+      "error": ""
+    },
+    {
+      "archetype_id": "A20",
+      "injected": true,
+      "description": "iCPD at V5, no \u22654wk confirmation",
+      "l1_flag_count": 5958,
+      "l3_flag_count": 0,
+      "detected": true,
+      "detection_source": "L1",
+      "flag_delta_vs_clean": 1,
+      "error": ""
+    }
+  ],
+  "summary": {
+    "archetypes_tested": 20,
+    "injected": 20,
+    "detected": 20,
+    "detection_rate": 1.0,
+    "l1_detections": 19,
+    "l3_detections": 1,
+    "cave_total": 20,
+    "cave_only_catches": [
+      "A19"
+    ],
+    "cave_only_count": 1,
+    "false_positive_delta": 198,
+    "clean_baseline_l1": 5957
+  },
+  "_provenance_note": "Legacy global-delta view (generated pre-A03-hardening). The 20/20 headline is REPRODUCIBLE from current hardened shapes via the subject-specific candidate criterion in eval/track_b_candidate_results.json (scripts/track_b_analysis.py --candidates). The raw global-delta on current shapes under-credits A01/A07/A16/A17 whose auto-picked subject does not manifest the pattern post-hardening; the candidate criterion (same one used for the held-out analysis) avoids that over/under-crediting artifact."
+}

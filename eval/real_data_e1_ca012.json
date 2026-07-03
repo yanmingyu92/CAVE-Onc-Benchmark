@@ -1,0 +1,78 @@
+{
+  "tag": "ca012",
+  "backend": "oxigraph",
+  "n_subjects_total": 227,
+  "n_subjects_run": 227,
+  "triples": 96225,
+  "conforms": false,
+  "report_is_graph": true,
+  "total_flags": 4779,
+  "bucket_totals": {
+    "recist_derivation": 171,
+    "archetype": 20,
+    "core_structural": 2764,
+    "anon_property": 1824
+  },
+  "flags_per_shape": {
+    "Shape_CORE-000385": 1175,
+    "n66e8884b8e34432fb2ad46d612ed2e13b276": 227,
+    "Shape_CORE-000655": 227,
+    "n66e8884b8e34432fb2ad46d612ed2e13b284": 227,
+    "Shape_CORE-000189": 227,
+    "n66e8884b8e34432fb2ad46d612ed2e13b283": 227,
+    "Shape_CORE-000191": 227,
+    "Shape_CORE-000883": 227,
+    "n66e8884b8e34432fb2ad46d612ed2e13b341": 227,
+    "n66e8884b8e34432fb2ad46d612ed2e13b408": 227,
+    "n66e8884b8e34432fb2ad46d612ed2e13b409": 227,
+    "n66e8884b8e34432fb2ad46d612ed2e13b339": 227,
+    "Shape_CORE-000656": 227,
+    "Shape_CORE-000378": 227,
+    "n66e8884b8e34432fb2ad46d612ed2e13b317": 227,
+    "Shape_CORE-000452": 227,
+    "Shape_RECIST_S1_sld_math": 92,
+    "Shape_RECIST_S7_confirmation": 46,
+    "Shape_RECIST_S3_target_pr": 16,
+    "Shape_RECIST_S8_ne_propagation": 13,
+    "Shape_Archetype_A02": 9,
+    "n66e8884b8e34432fb2ad46d612ed2e13b346": 8,
+    "Shape_Archetype_A07": 4,
+    "Shape_Archetype_A01": 3,
+    "Shape_RECIST_S5_target_sd": 3,
+    "Shape_Archetype_A09": 2,
+    "Shape_Archetype_A14": 2,
+    "Shape_RECIST_S4_target_pd": 1
+  },
+  "recist_signal_shapes": {
+    "Shape_RECIST_S1_sld_math": 92,
+    "Shape_RECIST_S7_confirmation": 46,
+    "Shape_RECIST_S3_target_pr": 16,
+    "Shape_RECIST_S8_ne_propagation": 13,
+    "Shape_RECIST_S5_target_sd": 3,
+    "Shape_RECIST_S4_target_pd": 1
+  },
+  "archetype_shapes": {
+    "Shape_Archetype_A02": 9,
+    "Shape_Archetype_A07": 4,
+    "Shape_Archetype_A01": 3,
+    "Shape_Archetype_A09": 2,
+    "Shape_Archetype_A14": 2
+  },
+  "flagged_subjects": 227,
+  "top_flagged_subjects": {
+    "CA012-180": 34,
+    "CA012-111": 33,
+    "CA012-30": 30,
+    "CA012-15": 29,
+    "CA012-199": 29,
+    "CA012-136": 29,
+    "CA012-203": 28,
+    "CA012-181": 28,
+    "CA012-59": 28,
+    "CA012-108": 27
+  },
+  "timing_sec": {
+    "load": 1.2,
+    "validate": 41.5
+  }
+}

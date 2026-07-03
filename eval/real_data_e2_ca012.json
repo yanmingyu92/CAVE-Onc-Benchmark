@@ -1,0 +1,233 @@
+{
+  "tag": "ca012_e2",
+  "backend": "oxigraph",
+  "src": "data/real_sdtm/ca012",
+  "n_subjects": 227,
+  "candidates_per_archetype": 10,
+  "clean_baseline_l1_flags": 4779,
+  "summary": {
+    "archetypes_total": 20,
+    "applicable": 18,
+    "detected": 16,
+    "missed": 2,
+    "not_applicable": 2,
+    "recall_on_applicable": 0.889,
+    "detected_ids": [
+      "A01",
+      "A02",
+      "A04",
+      "A05",
+      "A06",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18"
+    ],
+    "missed_ids": [
+      "A07",
+      "A20"
+    ],
+    "not_applicable_ids": [
+      "A03",
+      "A19"
+    ]
+  },
+  "archetypes": [
+    {
+      "archetype_id": "A01",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 1,
+      "errors": [
+        "CA012-107: single positional indexer is out-of-bounds"
+      ],
+      "usubjid": "CA012-106",
+      "seconds": 2.9
+    },
+    {
+      "archetype_id": "A02",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 6,
+      "usubjid": "CA012-100",
+      "seconds": 3.0
+    },
+    {
+      "archetype_id": "A03",
+      "status": "not_applicable",
+      "reason": "AE domain present but carries no causality attribution (AEREL); A03's attributed-AE join cannot be exercised",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A04",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 2.9
+    },
+    {
+      "archetype_id": "A05",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.0
+    },
+    {
+      "archetype_id": "A06",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 5,
+      "usubjid": "CA012-100",
+      "seconds": 3.1
+    },
+    {
+      "archetype_id": "A07",
+      "status": "missed",
+      "detection_source": "",
+      "candidates_tried": 10,
+      "candidates_detected": 0,
+      "seconds": 3.0
+    },
+    {
+      "archetype_id": "A08",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.1
+    },
+    {
+      "archetype_id": "A09",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.2
+    },
+    {
+      "archetype_id": "A10",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.1
+    },
+    {
+      "archetype_id": "A11",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.9
+    },
+    {
+      "archetype_id": "A12",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 4.6
+    },
+    {
+      "archetype_id": "A13",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.9
+    },
+    {
+      "archetype_id": "A14",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.2
+    },
+    {
+      "archetype_id": "A15",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "usubjid": "CA012-1",
+      "seconds": 3.2
+    },
+    {
+      "archetype_id": "A16",
+      "status": "detected",
+      "detection_source": "L1_structural",
+      "candidates_tried": 10,
+      "candidates_detected": 10,
+      "new_shapes_on_subject": [
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb276",
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb283",
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb284",
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb317",
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb339",
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb341",
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb408",
+        "n573d9bb18f5b4237af7a4a5ddb23d35bb409"
+      ],
+      "usubjid": "CA012-1",
+      "seconds": 3.4
+    },
+    {
+      "archetype_id": "A17",
+      "status": "detected",
+      "detection_source": "L1",
+      "usubjid": "CA012-1",
+      "description": "ARM changed for ARMCD=B \u2192 not 1:1",
+      "total_flag_delta": 227,
+      "seconds": 42.2
+    },
+    {
+      "archetype_id": "A18",
+      "status": "detected",
+      "detection_source": "L1",
+      "candidates_tried": 10,
+      "candidates_detected": 1,
+      "usubjid": "CA012-107",
+      "seconds": 3.4
+    },
+    {
+      "archetype_id": "A19",
+      "status": "not_applicable",
+      "reason": "L3 Table-7 needs a single overall-RS row + NTOVRLRESP/NEWLEC codes; real-trial RS is multi-row and lacks them (would need synthetic enrichment)",
+      "seconds": 0.0
+    },
+    {
+      "archetype_id": "A20",
+      "status": "missed",
+      "detection_source": "",
+      "candidates_tried": 10,
+      "candidates_detected": 0,
+      "seconds": 3.0
+    }
+  ],
+  "timing_sec": {
+    "baseline": 42.3,
+    "total": 140.3
+  }
+}

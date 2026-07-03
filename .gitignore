@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtual envs
+.venv/
+venv/
+env/
+.uv/
+
+# Secrets — never publish
+.env
+.env.*
+*.key
+*.pem
+*credentials*
+*_secret*
+*_token*
+
+# IDE / OS
+.vscode/
+.idea/
+.vs/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Never publish: internal reviewer packet (named individuals / PII), planning, trackers
+docs/reviewer_packet/
+plan/
+archive/
+tasks.md
+
+# Audit DBs (runtime)
+audit/*.db
+audit/*.db-wal
+audit/*.db-shm
+*.log
+
+# Regenerable raw / caches (large; not part of the released benchmark)
+eval/core_pilot1_raw.json
+eval/core_benchmark/
+eval/p21_fda_reports/
+p21_*_report.xlsx
+bench/core_lean/
+bench/core_corpus/
+bench/core_corpus_orig/
+bench/output_*/
+gate_a/cache/
+gate_a/raw/
+
+# Raw sponsor data — never publish (only derived/mapped SDTM is used; itself gitignored)
+data/real_oncology_data/
+data/real_sdtm/
+
+# LaTeX build intermediates
+*.aux
+*.fls
+*.fdb_latexmk
+*.blg
+*.bbl
+*.out
+*.spl
