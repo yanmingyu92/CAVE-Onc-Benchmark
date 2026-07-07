@@ -64,6 +64,12 @@ def _setup_font():
     })
 
 
+def _save_fig(fig, png_path):
+    """Save a figure as PNG (submission raster) and a PDF vector sibling."""
+    fig.savefig(png_path, dpi=DPI, facecolor=C_WHITE)
+    fig.savefig(Path(png_path).with_suffix(".pdf"), facecolor=C_WHITE)
+
+
 # ── Figure 1: Architecture Diagram ──────────────────────────────────────────
 
 def render_figure1(outpath: Path):
@@ -104,55 +110,39 @@ def render_figure1(outpath: Path):
             zorder=1
         )
 
-    # Row positions
+    # Row positions — five evenly spaced stages (width 1.6, gap 0.4)
     main_y = 1.7
     box_h = 1.1
+    bw = 1.6
+    xs = [0.1, 2.1, 4.1, 6.1, 8.1]  # left edges; right edges 1.7/3.7/5.7/7.7/9.7
 
-    # Input
-    _box(0.1, main_y, 1.3, box_h, "#DBEAFE", "XPT Files",
+    _box(xs[0], main_y, bw, box_h, "#DBEAFE", "XPT Files",
          "TU/TR/RS/EX/DM\nAE/DS/TA/SUPPDM")
-
-    # RDF KG
-    _box(1.9, main_y, 1.5, box_h, "#E0E7FF", "RDF Knowledge\nGraph",
-         "CAVE namespace\n1.5M+ triples")
-
-    # L1
-    _box(3.9, main_y, 1.5, box_h, "#BFDBFE", "L1: SHACL",
+    _box(xs[1], main_y, bw, box_h, "#E0E7FF", "RDF Knowledge\nGraph",
+         "CAVE namespace\nRDF triples")
+    _box(xs[2], main_y, bw, box_h, "#BFDBFE", "L1: SHACL",
          "111 shapes\n(85+8+18)")
-
-    # L3
-    _box(5.9, main_y, 1.5, box_h, "#A7F3D0", "L3: CaveAgent",
+    _box(xs[3], main_y, bw, box_h, "#A7F3D0", "L3: CaveAgent",
          "RECIST Table 7\nLangGraph")
-
-    # Audit
-    _box(7.9, main_y, 1.5, box_h, "#F3F4F6", "Audit Store",
+    _box(xs[4], main_y, bw, box_h, "#F3F4F6", "Audit Store",
          "SQLite WAL\nMerkle chain")
 
-    # Arrows between main boxes
-    _arrow(1.4, main_y + box_h / 2, 1.9, main_y + box_h / 2)
-    _arrow(3.4, main_y + box_h / 2, 3.9, main_y + box_h / 2)
-    _arrow(5.4, main_y + box_h / 2, 5.9, main_y + box_h / 2)
-    _arrow(7.4, main_y + box_h / 2, 7.9, main_y + box_h / 2)
+    # Arrows between main boxes (right edge -> next left edge)
+    for xr, xl in zip([x + bw for x in xs[:4]], xs[1:]):
+        _arrow(xr, main_y + box_h / 2, xl, main_y + box_h / 2)
 
-    # Output boxes below
+    # Output boxes below L1 and L3 (generic; no track-specific metrics inside
+    # a schematic architecture diagram)
     out_y = 0.3
     out_h = 0.8
-
-    _box(3.9, out_y, 1.5, out_h, "#EFF6FF", "L1 Violations",
-         "5,803 flags")
-    _box(5.9, out_y, 1.5, out_h, "#ECFDF5", "L3 Traces",
-         "A19 detected")
+    _box(xs[2], out_y, bw, out_h, "#EFF6FF", "L1 Violations")
+    _box(xs[3], out_y, bw, out_h, "#ECFDF5", "L3 Traces")
 
     # Downward arrows
-    _arrow(4.65, main_y, 4.65, out_y + out_h)
-    _arrow(6.65, main_y, 6.65, out_y + out_h)
+    _arrow(xs[2] + bw / 2, main_y, xs[2] + bw / 2, out_y + out_h)
+    _arrow(xs[3] + bw / 2, main_y, xs[3] + bw / 2, out_y + out_h)
 
-    # Title bar
-    ax.text(5.0, 3.6, "CAVE-Onc Two-Layer Validation Architecture",
-            ha="center", va="center", fontsize=11, fontweight="bold",
-            color=C_TEXT)
-
-    # Legend
+    # Legend (no in-image title — PLOS requires titles only in the caption)
     legend_items = [
         mpatches.Patch(facecolor="#BFDBFE", edgecolor="#374151", label="L1 (SHACL)"),
         mpatches.Patch(facecolor="#A7F3D0", edgecolor="#374151", label="L3 (Agent)"),
@@ -161,7 +151,7 @@ def render_figure1(outpath: Path):
     ax.legend(handles=legend_items, loc="upper right", framealpha=0.9,
               fontsize=7, edgecolor="#D1D5DB")
 
-    fig.savefig(outpath, dpi=DPI, facecolor=C_WHITE)
+    _save_fig(fig, outpath)
     plt.close(fig)
     print(f"  Figure 1 saved: {outpath} ({outpath.stat().st_size:,} bytes)")
 
@@ -179,14 +169,16 @@ def render_figure2(outpath: Path, csv_path: Path):
 
     n = len(rows)
     labels_y = [f"{r['archetype_id']}: {r['name']}" for r in rows]
-    labels_x = ["CORE (B2)", "L1-only (B3)", "CAVE L1+L3"]
+    labels_x = ["Pinnacle 21\nFDA (B1)", "CORE (B2)", "L1-only (B3)", "CAVE\nL1+L3"]
+    ncol = len(labels_x)
 
-    # Build matrix (0 = not detected, 1 = detected)
-    matrix = np.zeros((n, 3))
+    # Build matrix (0 = not detected, 1 = detected); columns match Table 3
+    matrix = np.zeros((n, ncol))
     for i, r in enumerate(rows):
-        matrix[i, 0] = int(r["CORE_detected"])
-        matrix[i, 1] = int(r["L1_only_detected"])
-        matrix[i, 2] = int(r["CAVE_L1L3_detected"])
+        matrix[i, 0] = int(r["P21_FDA_detected"])
+        matrix[i, 1] = int(r["CORE_detected"])
+        matrix[i, 2] = int(r["L1_only_detected"])
+        matrix[i, 3] = int(r["CAVE_L1L3_detected"])
 
     fig, ax = plt.subplots(1, 1, figsize=(COL_WIDTH, 6.5))
     fig.patch.set_facecolor(C_WHITE)
@@ -200,12 +192,12 @@ def render_figure2(outpath: Path, csv_path: Path):
     # Gridlines
     for i in range(n + 1):
         ax.axhline(i - 0.5, color=C_WHITE, linewidth=1.5)
-    for j in range(4):
+    for j in range(ncol + 1):
         ax.axvline(j - 0.5, color=C_WHITE, linewidth=1.5)
 
     # Axis labels
-    ax.set_xticks(range(3))
-    ax.set_xticklabels(labels_x, fontsize=9, fontweight="bold")
+    ax.set_xticks(range(ncol))
+    ax.set_xticklabels(labels_x, fontsize=8, fontweight="bold")
     ax.xaxis.set_ticks_position("top")
     ax.xaxis.set_label_position("top")
 
@@ -214,7 +206,7 @@ def render_figure2(outpath: Path, csv_path: Path):
 
     # Cell annotations
     for i in range(n):
-        for j in range(3):
+        for j in range(ncol):
             val = int(matrix[i, j])
             txt = "Y" if val == 1 else "-"
             color = C_WHITE if val == 1 else C_GREY_MID
@@ -223,25 +215,24 @@ def render_figure2(outpath: Path, csv_path: Path):
 
     # Highlight A19 row
     a19_idx = next(i for i, r in enumerate(rows) if r["archetype_id"] == "A19")
-    ax.add_patch(plt.Rectangle((-0.5, a19_idx - 0.5), 3, 1,
+    ax.add_patch(plt.Rectangle((-0.5, a19_idx - 0.5), ncol, 1,
                                fill=False, edgecolor=C_GREEN, linewidth=2.5,
                                linestyle="--", zorder=5))
-    ax.text(3.15, a19_idx, "← L3 only", fontsize=7, color=C_GREEN_DARK,
+    ax.text(ncol + 0.15, a19_idx, "← L3 only", fontsize=7, color=C_GREEN_DARK,
             va="center", fontweight="bold")
-
-    ax.set_title("Contradiction Archetype Detection Across Configurations",
-                 fontsize=11, fontweight="bold", pad=20, color=C_TEXT)
+    # No in-image title (PLOS requires titles only in the caption)
 
     # Legend
     legend_items = [
         mpatches.Patch(facecolor=C_BLUE, edgecolor="#374151", label="Detected"),
         mpatches.Patch(facecolor=C_GREY, edgecolor="#374151", label="Not detected"),
     ]
-    ax.legend(handles=legend_items, loc="lower right",
+    ax.legend(handles=legend_items, loc="upper center",
+              bbox_to_anchor=(0.5, -0.02), ncol=2,
               fontsize=8, edgecolor="#D1D5DB", framealpha=0.9)
 
     fig.tight_layout()
-    fig.savefig(outpath, dpi=DPI, facecolor=C_WHITE)
+    _save_fig(fig, outpath)
     plt.close(fig)
     print(f"  Figure 2 saved: {outpath} ({outpath.stat().st_size:,} bytes)")
 
@@ -255,7 +246,7 @@ def render_figure3(outpath: Path, json_path: Path):
 
     timing = data["timing"]
     # Source data
-    components = ["CORE baseline", "L1 (SHACL, 111 shapes)", "L3 (Agent)", "Full CAVE (L1+L3)"]
+    components = ["Clean-data L1 baseline", "L1 (SHACL, 111 shapes)", "L3 (Agent)", "Full CAVE (L1+L3)"]
     times = [
         timing.get("clean_baseline_l1_s", 103.664),
         timing["mean_per_archetype_l1_s"],
@@ -302,7 +293,7 @@ def render_figure3(outpath: Path, json_path: Path):
 
     # CAVE/CORE ratio annotation
     ratio = timing["cave_to_baseline_ratio"]
-    ax1.text(times[3] + 1.5, 3.45, f"CAVE/CORE = {ratio:.2f}×",
+    ax1.text(times[3] + 1.5, 3.45, f"CAVE / Clean L1 = {ratio:.2f}×",
              fontsize=7, color=C_PURPLE, fontweight="bold", va="top")
 
     # Panel (b): Zoomed L3
@@ -318,23 +309,146 @@ def render_figure3(outpath: Path, json_path: Path):
     ax2.text(times[2] + 0.002, 0, f"{times[2]*1000:.0f}ms",
              va="center", fontsize=8, color=C_GREEN_DARK, fontweight="bold")
 
-    fig.suptitle("Mean Validation Time per Archetype by Component",
-                 fontsize=11, fontweight="bold", color=C_TEXT, y=1.02)
+    # No in-image suptitle (PLOS requires titles only in the caption)
     fig.tight_layout()
-    fig.savefig(outpath, dpi=DPI, facecolor=C_WHITE)
+    _save_fig(fig, outpath)
     plt.close(fig)
     print(f"  Figure 3 saved: {outpath} ({outpath.stat().st_size:,} bytes)")
+
+
+# ── Supplementary Figure S1: Oxigraph scaling ───────────────────────────────
+
+def render_figure_scaling(outpath: Path, json_path: Path):
+    """Log-log scaling: SPARQL detection (sub-linear) vs end-to-end pipeline."""
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    rows = sorted(data["scale_results"], key=lambda r: r["subjects"])
+    subj = np.array([r["subjects"] for r in rows], dtype=float)
+    detect_s = np.array([r["sparql_query_s"] for r in rows], dtype=float)
+    e2e_s = np.array([r["subjects"] / r["end_to_end_throughput_subjects_per_s"]
+                      for r in rows], dtype=float)
+
+    sc = data["scaling"]
+    exp_detect = sc["sparql_query_exponent_loglog"]
+    exp_e2e = sc["end_to_end_exponent_loglog"]
+
+    fig, ax = plt.subplots(1, 1, figsize=(COL_WIDTH * 0.72, 3.4))
+    fig.patch.set_facecolor(C_WHITE)
+
+    # Fitted power-law reference lines (anchored at the first point)
+    xs = np.linspace(subj.min(), subj.max(), 100)
+    ax.plot(xs, detect_s[0] * (xs / subj[0]) ** exp_detect,
+            color=C_BLUE, lw=1.2, ls="--", alpha=0.8, zorder=1)
+    ax.plot(xs, e2e_s[0] * (xs / subj[0]) ** exp_e2e,
+            color=C_ORANGE, lw=1.2, ls="--", alpha=0.8, zorder=1)
+
+    ax.plot(subj, detect_s, "o-", color=C_BLUE, lw=1.8, ms=7, zorder=3,
+            label=f"SPARQL detection (slope {exp_detect:.2f}, sub-linear)")
+    ax.plot(subj, e2e_s, "s-", color=C_ORANGE, lw=1.8, ms=6, zorder=3,
+            label=f"End-to-end pipeline (slope {exp_e2e:.2f})")
+
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlabel("Cohort size (subjects)", fontsize=9)
+    ax.set_ylabel("Wall-clock time (s)", fontsize=9)
+    ax.set_xticks(subj)
+    ax.set_xticklabels([f"{int(s):,}" for s in subj])
+    # Suppress default log-scale minor tick labels (2x10^3 etc.) that would
+    # otherwise overlap the custom cohort-size labels.
+    import matplotlib.ticker as mticker
+    ax.xaxis.set_minor_locator(mticker.NullLocator())
+    ax.grid(True, which="both", alpha=0.3, zorder=0)
+    ax.set_facecolor(C_BG)
+    ax.legend(fontsize=7.5, loc="upper left", framealpha=0.9, edgecolor="#D1D5DB")
+
+    fig.tight_layout()
+    _save_fig(fig, outpath)
+    plt.close(fig)
+    print(f"  Figure S1 saved: {outpath} ({outpath.stat().st_size:,} bytes)")
+
+
+# ── Supplementary Figure S2: real-data transfer (Item E) ─────────────────────
+
+def render_figure_realdata(outpath: Path, synta_json: Path, ca012_json: Path):
+    """3-state real-data transfer heatmap: detected / applicable-missed / N/A."""
+    def states(path):
+        s = json.load(open(path, encoding="utf-8"))["summary"]
+        return set(s["detected_ids"]), set(s["missed_ids"])
+
+    sd, sm = states(synta_json)
+    cd, cm = states(ca012_json)
+    aids = [f"A{i:02d}" for i in range(1, 21)]
+
+    def code(a, det, mis):
+        return 2 if a in det else (1 if a in mis else 0)  # 2=detected 1=missed 0=N/A
+
+    matrix = np.array([[code(a, sd, sm), code(a, cd, cm)] for a in aids], dtype=float)
+
+    from matplotlib.colors import ListedColormap
+    cmap = ListedColormap([C_GREY, C_ORANGE, C_BLUE])
+
+    fig, ax = plt.subplots(1, 1, figsize=(3.4, 6.2))
+    fig.patch.set_facecolor(C_WHITE)
+    ax.imshow(matrix, cmap=cmap, aspect="auto", vmin=0, vmax=2)
+
+    for i in range(len(aids) + 1):
+        ax.axhline(i - 0.5, color=C_WHITE, lw=1.5)
+    for j in range(3):
+        ax.axvline(j - 0.5, color=C_WHITE, lw=1.5)
+
+    ax.set_xticks(range(2))
+    ax.set_xticklabels(["Synta\n4783-08", "CA012\n(mBC)"], fontsize=8, fontweight="bold")
+    ax.xaxis.set_ticks_position("top")
+    ax.xaxis.set_label_position("top")
+    ax.set_yticks(range(len(aids)))
+    ax.set_yticklabels(aids, fontsize=7)
+
+    sym = {2: "Y", 1: "x", 0: "-"}
+    txtcol = {2: C_WHITE, 1: C_WHITE, 0: C_GREY_MID}
+    for i in range(len(aids)):
+        for j in range(2):
+            v = int(matrix[i, j])
+            ax.text(j, i, sym[v], ha="center", va="center",
+                    fontsize=8, fontweight="bold", color=txtcol[v])
+
+    legend_items = [
+        mpatches.Patch(facecolor=C_BLUE, edgecolor="#374151", label="Detected"),
+        mpatches.Patch(facecolor=C_ORANGE, edgecolor="#374151", label="Applicable, missed"),
+        mpatches.Patch(facecolor=C_GREY, edgecolor="#374151", label="Not applicable"),
+    ]
+    ax.legend(handles=legend_items, loc="upper center", bbox_to_anchor=(0.5, -0.015),
+              ncol=1, fontsize=7.5, edgecolor="#D1D5DB", framealpha=0.9)
+
+    fig.tight_layout()
+    _save_fig(fig, outpath)
+    plt.close(fig)
+    print(f"  Figure S2 saved: {outpath} ({outpath.stat().st_size:,} bytes)")
+
+
+# ── PNG → publication TIFF (PLOS: RGB, LZW, 300 dpi) ─────────────────────────
+
+def png_to_tiff(png_path: Path, tif_path: Path):
+    """Convert a rendered PNG to a PLOS-compliant TIFF (RGB, LZW, 300 dpi)."""
+    from PIL import Image
+    im = Image.open(png_path).convert("RGB")
+    im.save(tif_path, format="TIFF", compression="tiff_lzw", dpi=(DPI, DPI))
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(description="Render CAVE-Onc manuscript figures.")
-    parser.add_argument("--outdir", default="docs/figures", help="Output directory")
+    parser.add_argument("--outdir", default="docs/figures",
+                        help="PNG working directory (also holds detection_heatmap.csv)")
+    parser.add_argument("--tifdir", default="docs/latex/plos_submission/figures",
+                        help="Where submission TIFFs (Fig1-3) and Fig S1 are written")
     args = parser.parse_args()
 
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
+    tifdir = Path(args.tifdir)
+    tifdir.mkdir(parents=True, exist_ok=True)
 
     _setup_font()
 
@@ -342,7 +456,20 @@ def main():
     render_figure1(outdir / "figure1_architecture.png")
     render_figure2(outdir / "figure2_heatmap.png", outdir / "detection_heatmap.csv")
     render_figure3(outdir / "figure3_timing.png", Path("eval/p8_benchmark_results.json"))
-    print("Done. All figures saved to", outdir)
+    render_figure_scaling(tifdir / "FigS1_scaling.png", Path("eval/scale_benchmark_large.json"))
+    render_figure_realdata(tifdir / "FigS2_realdata.png",
+                           Path("eval/real_data_e2_synta.json"),
+                           Path("eval/real_data_e2_ca012.json"))
+
+    print("Converting main figures to publication TIFFs (+ vector PDF)...")
+    import shutil
+    for stem, name in [("figure1_architecture", "Fig1"),
+                       ("figure2_heatmap", "Fig2"),
+                       ("figure3_timing", "Fig3")]:
+        png_to_tiff(outdir / f"{stem}.png", tifdir / f"{name}.tif")
+        shutil.copy(outdir / f"{stem}.pdf", tifdir / f"{name}.pdf")  # vector sibling
+        print(f"  {name}.tif + {name}.pdf")
+    print("Done.")
 
 
 if __name__ == "__main__":

@@ -1,21 +1,21 @@
-archetype_id,name,CORE_detected,L1_only_detected,CAVE_L1L3_detected
-A01,SLD decrease >=30% with RSORRES=PD,0,1,1
-A02,New lesion without RS escalation,0,1,1
-A03,EX start after attributed AE,0,1,1
-A04,Visit-window violation propagated,0,1,1
-A05,Conflicting demographics DM vs SUPPDM,0,1,1
-A06,Non-target PD with RS=SD,0,1,1
-A07,Confirmed PR without confirmation visit,0,1,1
-A08,ARMCD not in TA valueset,0,1,1
-A09,Assigned subject missing disposition,0,1,1
-A10,RFXSTDTC mismatch with earliest EXSTDTC,0,1,1
-A11,RFXENDTC mismatch with latest EXENDTC,0,1,1
-A12,Death flag without death details,0,1,1
-A13,RACE=MULTIPLE without SUPPDM records,0,1,1
-A14,Assigned arm but no exposure record,0,1,1
-A15,RFSTDTC mismatch with first EXSTDTC,0,1,1
-A16,Duplicate USUBJID across studies,0,1,1
-A17,ARMCD-ARM not one-to-one,0,1,1
-A18,Non-target overall response misclassification,0,1,1
-A19,Table 7 overall response contradiction,0,0,1
-A20,iRECIST immune PD confirmation failure,0,1,1
+archetype_id,name,P21_FDA_detected,CORE_detected,L1_only_detected,CAVE_L1L3_detected
+A01,SLD decrease >=30% with RSORRES=PD,0,0,1,1
+A02,New lesion without RS escalation,0,0,1,1
+A03,EX start after attributed AE,0,0,1,1
+A04,Visit-window violation propagated,0,0,1,1
+A05,Conflicting demographics DM vs SUPPDM,0,0,1,1
+A06,Non-target PD with RS=SD,0,0,1,1
+A07,Confirmed PR without confirmation visit,0,0,1,1
+A08,ARMCD not in TA valueset,1,1,1,1
+A09,Assigned subject missing disposition,1,1,1,1
+A10,RFXSTDTC mismatch with earliest EXSTDTC,0,1,1,1
+A11,RFXENDTC mismatch with latest EXENDTC,0,1,1,1
+A12,Death flag without death details,1,1,1,1
+A13,RACE=MULTIPLE without SUPPDM records,0,1,1,1
+A14,Assigned arm but no exposure record,1,0,1,1
+A15,RFSTDTC mismatch with first EXSTDTC,0,0,1,1
+A16,Duplicate USUBJID across studies,1,1,1,1
+A17,ARMCD-ARM not one-to-one,1,1,1,1
+A18,Non-target overall response misclassification,0,0,1,1
+A19,Table 7 overall response contradiction,0,0,0,1
+A20,iRECIST immune PD confirmation failure,0,0,1,1
