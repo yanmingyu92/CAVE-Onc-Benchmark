@@ -273,6 +273,7 @@ def render_figure3(outpath: Path, json_path: Path):
     ax1.set_yticklabels(components, fontsize=8)
     ax1.set_xlabel("Time (seconds)", fontsize=9)
     ax1.set_title("A", fontsize=11, fontweight="bold", loc="left")
+    ax1.set_xlim(0, max(times) * 1.15)
     ax1.invert_yaxis()
     ax1.grid(axis="x", alpha=0.3, zorder=0)
     ax1.set_facecolor(C_BG)
