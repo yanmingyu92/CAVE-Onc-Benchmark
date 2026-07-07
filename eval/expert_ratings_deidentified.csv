@@ -1,0 +1,28 @@
+# CAVE-Onc expert validation (G8) — DE-IDENTIFIED per-archetype rating counts.
+# Three anonymized domain experts rated each of the 20 contradiction archetypes as
+# valid / invalid / uncertain. Each row sums to 3 (raters). No rater identities,
+# roles, dates, or free-text rationale are included. This matrix is the exact input
+# to Fleiss kappa (see scripts/reproduce_kappa.py) and reproduces the manuscript
+# values: Fleiss kappa = 0.705 (substantial), unanimous-valid 14/20, majority-valid
+# 16/20, any-invalid 0/20.
+archetype_id,valid,invalid,uncertain
+A01,2,0,1
+A02,3,0,0
+A03,3,0,0
+A04,0,0,3
+A05,3,0,0
+A06,3,0,0
+A07,0,0,3
+A08,3,0,0
+A09,3,0,0
+A10,3,0,0
+A11,3,0,0
+A12,1,0,2
+A13,3,0,0
+A14,2,0,1
+A15,3,0,0
+A16,3,0,0
+A17,3,0,0
+A18,3,0,0
+A19,3,0,0
+A20,0,0,3
