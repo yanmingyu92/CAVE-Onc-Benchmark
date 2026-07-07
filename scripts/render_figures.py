@@ -272,7 +272,7 @@ def render_figure3(outpath: Path, json_path: Path):
     ax1.set_yticks(y_pos)
     ax1.set_yticklabels(components, fontsize=8)
     ax1.set_xlabel("Time (seconds)", fontsize=9)
-    ax1.set_title("(a) Full scale", fontsize=9, fontweight="bold")
+    ax1.set_title("A", fontsize=11, fontweight="bold", loc="left")
     ax1.invert_yaxis()
     ax1.grid(axis="x", alpha=0.3, zorder=0)
     ax1.set_facecolor(C_BG)
@@ -291,18 +291,13 @@ def render_figure3(outpath: Path, json_path: Path):
                 arrowprops=dict(arrowstyle="->", color=C_GREEN_DARK, lw=1.0),
             )
 
-    # CAVE/CORE ratio annotation
-    ratio = timing["cave_to_baseline_ratio"]
-    ax1.text(times[3] + 1.5, 3.45, f"CAVE / Clean L1 = {ratio:.2f}×",
-             fontsize=7, color=C_PURPLE, fontweight="bold", va="top")
-
     # Panel (b): Zoomed L3
     ax2.barh([0], [times[2]], color=[C_GREEN], edgecolor="#374151",
               linewidth=0.8, height=0.5, zorder=2)
     ax2.set_yticks([0])
     ax2.set_yticklabels(["L3 Agent"], fontsize=8)
     ax2.set_xlabel("Time (seconds)", fontsize=9)
-    ax2.set_title("(b) L3 detail", fontsize=9, fontweight="bold")
+    ax2.set_title("B", fontsize=11, fontweight="bold", loc="left")
     ax2.set_xlim(0, 0.05)
     ax2.grid(axis="x", alpha=0.3, zorder=0)
     ax2.set_facecolor(C_BG)
